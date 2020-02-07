@@ -1,0 +1,3 @@
+move element with nodes
+ratio up and down
+node delete

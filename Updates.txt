@@ -1,0 +1,13 @@
+1/14
+
+- 몇가지 버그 수정
+- sub circuit에 lable을 달아서 pin의 이름을 수정할 수 있도록 함
+
+2/12
+-Tristate Buffer 추가
+
+2/19
+- fps lock 추가 (키보드 L)
+
+2/25
+- sub circuit updater 추가 구 버전 정보를 받아 새롭게 작성한 subcircuit 클래스로 데이터를 옮김

@@ -1,0 +1,6 @@
+1. element가 일부 겹쳐있을때 옮기면 한 지점으로 뭉친다. (하나를 옮기고 싶은데 여러개가 함께 움직임)
+쇼
+
+2. node를 만들 때에는 다른 작업은 moving one이 작동하지 않도록 해야함
+
+3. node 만들 때 ConCurrentModification error 발생
