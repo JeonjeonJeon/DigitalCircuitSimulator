@@ -1,6 +1,8 @@
 package main;
 
-import window.Window;
+import graphic.Graphic;
+import graphic.LinuxFrame;
+import graphic.WindowFrame;
 
 public class Main {
 	/* variables related to frame counter */
@@ -14,14 +16,15 @@ public class Main {
 	private static int framesCounter;
 	
 	public static boolean FPS_LOCK = true;
-	public Window window;
+	public Graphic graphic;
 	
 	public DigitalCircuitSimulator() {
-		window = new window.Window();
+		Class c = Property.isLinux() ? Class.forName("LinuxFrame") : Class.forName("WindowFrame");
+		graphic = (Graphic)c.newInstance();
 	}
 	
 	public static void main(String[] args) {
-		DigitalCircuitSimulator dcs = new DigitalCircuitSimulator();
+		Main dcs = new Main(); // digital circuit simulator
 		long now;
 		while(true) {
 			now = System.nanoTime();
@@ -43,7 +46,7 @@ public class Main {
 			
 			//////////////////////////
 			
-			dcs.window.render(FPS);
+			dcs.graphic.render(FPS);
 			
 			/////////////////////////////
 			frames++;
