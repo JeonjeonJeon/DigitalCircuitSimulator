@@ -2,7 +2,7 @@ package main;
 
 import window.Window;
 
-public class DigitalCircuitSimulator {
+public class Main {
 	/* variables related to frame counter */
 	public static int FPS = 0; //real FPS
 	private static long lastTime = System.nanoTime();
