@@ -1,18 +1,19 @@
+package graphic;
 
-// import javax.swing.JFrame;
+import main.Property;
 
 public class Frame {
 	
 	private static String osName;
 	public Frame(String name) {
 		
-		osName = System.getProperty("os.name");
-		if(osName.matches("Linux")) {
+		if() {
 		}
 
 		else {
+			// import javax.swing.JFrame;
 			javax.swing.JFrame frame = new javax.swing.JFrame(name);
-			frame.setBounds(100, 100, WIDTH, HEIGHT);
+			frame.setBounds(100, 100, Property.WIDTH, Property.HEIGHT);
 			
 
 		}
