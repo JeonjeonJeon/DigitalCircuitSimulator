@@ -6,6 +6,7 @@ import javax.swing.SpringLayout;
 public class WindowFrame extends Graphic {
 	private JFrame jf;
 	public WindowFrame(String name){
+		ws = new WorkSpace();
 		jf = new JFrame(name);
 		SpringLayout sl = new SpringLayout();
 
