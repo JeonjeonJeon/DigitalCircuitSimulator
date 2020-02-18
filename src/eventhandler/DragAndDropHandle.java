@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import datahandler.DataHandle;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
@@ -24,6 +25,7 @@ import main.Node;
 public class DragAndDropHandle  implements DropTargetListener {
 	
 	WorkSpace ws;
+	DataHandle data = DataHandle.createInstance();
 	
 	public DragAndDropHandle(WorkSpace workspace) {
 		ws = workspace;
@@ -44,14 +46,15 @@ public class DragAndDropHandle  implements DropTargetListener {
 				if(f.getAbsolutePath().endsWith(".dcs")) {
 					
 					Point2D.Double t = (Point2D.Double)(oin.readObject());
-					offsetX = t.x;
-					offsetY = t.y;
-					ios = (ArrayList<GateIO>)(oin.readObject());
-					element = (ArrayList<Element>)(oin.readObject());
-					node = (ArrayList<Node>)(oin.readObject());
+					ws.offsetX = t.x;
+					ws.offsetY = t.y;
+					data.setIos((ArrayList<GateIO>)(oin.readObject()));
+					data.setElement((ArrayList<Element>)(oin.readObject()));
+					data.setNode((ArrayList<Node>)(oin.readObject()));
 					int inputnum = 1;
 					int outputnum = 1;
-					for(Element el : element) {
+					for(int i = 0; i < data.elementSize(); i++) {
+						Element el = data.getElement(i);
 						if(el instanceof SubCircuitInput) {
 							inputnum++;
 						}
@@ -64,7 +67,7 @@ public class DragAndDropHandle  implements DropTargetListener {
 					oin.close();
 				}
 				else if(f.getAbsolutePath().endsWith(".sc")) {
-					getSCFile(f.getAbsolutePath(), getX(dtde.getLocation().x), getY(dtde.getLocation().y));
+					ws.getSCFile(f.getAbsolutePath(), ws.getX(dtde.getLocation().x), ws.getY(dtde.getLocation().y));
 				}
 				
 			}catch(Exception eeeee) {
