@@ -1,10 +1,8 @@
 package datahandler;
 
-import java.awt.Window;
 import java.util.ArrayList;
 
 import element.Element;
-import element.SubCircuit;
 import main.GateIO;
 import main.Node;
 
@@ -26,7 +24,9 @@ public class DataHandle {
 		if(data == null) data = new DataHandle();
 		return data;
 	}
-
+	
+//////////////////////////////////////////////////////////
+	
 	public Element getElement(int i) {
 		return element.get(i);
 	}
@@ -36,6 +36,8 @@ public class DataHandle {
 	public Node getNode(int i) {
 		return node.get(i);
 	}
+	
+//////////////////////////////////////////////////////////
 	
 	public int elementSize() {
 		return element.size();
@@ -49,7 +51,29 @@ public class DataHandle {
 		return node.size();
 	}
 
-	public void addElement(SubCircuit sc) {
-		element.add(sc);
+//////////////////////////////////////////////////////////
+
+	public void addElement(Element e) {
+		element.add(e);
+	}
+	
+	public void addGateIO(GateIO gio) {
+		ios.add(gio);
+	}
+	
+	public void addNode(Node n) {
+		node.add(n);
+	}
+	
+///////////////////////////////////////////////////////////
+	
+	public void removeElement(Element e) {
+		element.remove(e);
+	}
+	public void removeGateIO(GateIO gio) {
+		ios.remove(gio);
+	}
+	public void removeNode(Node nodeTemp) {
+		node.remove(nodeTemp);
 	}
 }

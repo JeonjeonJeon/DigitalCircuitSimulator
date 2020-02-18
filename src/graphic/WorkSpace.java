@@ -215,24 +215,26 @@ public class WorkSpace extends JPanel{
 
 	private void nodeExtension() {
 		if(nodeMaking == true) {
-			for(Node n : node) {
-				if(n.contains(mx, my)) {
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node n = data.getNode(i);
+				if(n.contains(mHandle.mx, mHandle.my)) {
 					nodeMaking = false;
 					nodeTemp.finishNode();
 					n.mergeNode(nodeTemp);
 					if(nodeTemp.type == 1) {
-						node.remove(nodeTemp);
+						data.removeNode(nodeTemp);
 					}
 					nodeTemp = null;
 					return;
 				}
 			}
-			for(GateIO io : ios) {//check if gato io is clicked
-				if(io.contains(mx, my)) {//finishing node
+			for(int i = 0; i < data.iosSize(); i++) { // check if gate io is clicked
+				GateIO io = data.getIos(i);
+				if(io.contains(mHandle.mx, mHandle.my)) {//finishing node
 					nodeMaking = false;
 					nodeTemp.finishNode();
 					io.setNode(nodeTemp);
-					if(nodeTemp.type == 0) node.add(nodeTemp);
+					if(nodeTemp.type == 0) data.addNode(nodeTemp);
 					nodeTemp = null;
 					return;
 				}
@@ -241,17 +243,19 @@ public class WorkSpace extends JPanel{
 		}
 		
 		else { //when nodeMaking is false
-			for(Node n : node) { //call node
-				if(n.contains(mx, my)) {
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node n = data.getNode(i);
+				if(n.contains(mHandle.mx, mHandle.my)) {
 					nodeMaking = true;
-					nodeTemp = n.callNode(mx, my);
+					nodeTemp = n.callNode(mHandle.mx, mHandle.my);
 					return;
 				}
 			}
-			for(GateIO io : ios) { //make new node
-				if(io.contains(mx, my)) {
+			for(int i = 0; i < data.iosSize(); i++) {
+				GateIO io = data.getIos(i);
+				if(io.contains(mHandle.mx, mHandle.my)) {
 					nodeMaking = true;
-					nodeTemp = new Node(mx, my);
+					nodeTemp = new Node(mHandle.mx, mHandle.my);
 					io.setNode(nodeTemp);
 					return;
 				}
