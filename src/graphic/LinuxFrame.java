@@ -6,10 +6,8 @@ package graphic;
 public class LinuxFrame implements graphic{
 	
 	public LinuxFrame(){
-		ws = new WorkSpace();
 	}
 
 	public void render(int fps){
-		ws.render(fps);
 	}
 }

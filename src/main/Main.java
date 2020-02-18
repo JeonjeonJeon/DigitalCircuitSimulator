@@ -2,7 +2,7 @@ package main;
 
 import graphic.Graphic;
 import graphic.LinuxFrame;
-import graphic.WindowFrame;
+import graphic.WindowsFrame;
 
 public class Main {
 	/* variables related to frame counter */
