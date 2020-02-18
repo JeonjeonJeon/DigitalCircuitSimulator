@@ -10,9 +10,9 @@ public class DataHandle {
 	
 	public static DataHandle data;
 	
-	public ArrayList<Element> element;
-	public ArrayList<GateIO> ios;
-	public ArrayList<Node> node;
+	private ArrayList<Element> element;
+	private ArrayList<GateIO> ios;
+	private ArrayList<Node> node;
 	
 	private DataHandle() {
 		element = new ArrayList<Element>();
@@ -35,6 +35,34 @@ public class DataHandle {
 	}
 	public Node getNode(int i) {
 		return node.get(i);
+	}
+	
+//////////////////////////////////////////////////////////
+	
+	public ArrayList<Element> getElement(){
+		return element;
+	}
+	
+	public ArrayList<GateIO> getIos() {
+		return ios;
+	}
+	
+	public ArrayList<Node> getNode() {
+		return node;
+	}
+	
+//////////////////////////////////////////////////////////
+	
+	public void setElement(ArrayList<Element> e) {
+		element = e;
+	}
+	
+	public void setIos(ArrayList<GateIO> gio) {
+		ios = gio;
+	}
+	
+	public void setNode(ArrayList<Node> n) {
+		node = n;
 	}
 	
 //////////////////////////////////////////////////////////

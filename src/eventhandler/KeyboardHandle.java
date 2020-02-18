@@ -10,12 +10,19 @@ import element.Switch;
 import element.TextBlock;
 import element.VPulse;
 import element.Vdc;
+import graphic.WorkSpace;
 import main.GateIO;
 import main.Node;
 
 // keyboard event handler
 
 public class KeyboardHandle implements KeyListener {
+	
+	WorkSpace ws;
+	
+	public KeyboardHandle(WorkSpace workspace) {
+		ws = workspace;
+	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

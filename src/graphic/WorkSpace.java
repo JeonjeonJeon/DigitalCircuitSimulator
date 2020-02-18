@@ -48,25 +48,25 @@ public class WorkSpace extends JPanel{
 	//offset changes (ctrl down + mouse drag) which means camera movement
 	
 	
-	private Node nodeTemp = null;
-	private Rectangle dragBox = null;
-	private Element ctrlCV = null;
-	private Rectangle2D.Double coordDot = new Rectangle2D.Double();
-	private NavigationBar nb = new NavigationBar();
-	private String message;
-	private boolean isSim = false;
-	private boolean simConti = false;
+	public Node nodeTemp = null;
+	public Rectangle dragBox = null;
+	public Element ctrlCV = null;
+	public Rectangle2D.Double coordDot = new Rectangle2D.Double();
+	public NavigationBar nb = new NavigationBar();
 	
-	private boolean nodeMaking = false;
-	private boolean movingOne = false;
-	private boolean statusHide = true;
+	public boolean isSim = false;
+	public boolean simConti = false;
+	
+	public boolean nodeMaking = false;
+	public boolean movingOne = false;
+	public boolean statusHide = true;
 	
 	//SubCircuit sc = new SubCircuit(7, 7);
 	
 	DropTarget dt; // drag and drop
-	private KeyboardHandle kbHandle = new KeyboardHandle();
-	private MouseHandle mHandle = new MouseHandle();
-	private DragAndDropHandle dnd = new DragAndDropHandle();
+	private KeyboardHandle kbHandle = new KeyboardHandle(this);
+	private MouseHandle mHandle = new MouseHandle(this);
+	private DragAndDropHandle dnd = new DragAndDropHandle(this);
 	
 	private DataHandle data = DataHandle.createInstance();
 	
@@ -213,7 +213,7 @@ public class WorkSpace extends JPanel{
 		oin.close();
 	}
 
-	private void nodeExtension() {
+	public void nodeExtension() {
 		if(nodeMaking == true) {
 			for(int i = 0; i < data.nodeSize(); i++) {
 				Node n = data.getNode(i);

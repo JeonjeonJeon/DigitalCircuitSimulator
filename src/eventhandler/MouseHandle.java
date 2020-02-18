@@ -36,6 +36,7 @@ import element.TristateBufferGate;
 import element.VPulse;
 import element.Vdc;
 import element.XorGate;
+import graphic.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
@@ -47,89 +48,97 @@ import main.Voltage;
 public class MouseHandle implements MouseListener, MouseMotionListener, MouseWheelListener {
 	
 	DataHandle data = DataHandle.createInstance();
+	WorkSpace ws;
 	
 	public double mPositionX = 0, mPositionY = 0;
 	public double mx = 0, my = 0;//mouse coordinate
 	public double dx = 0, dy = 0;
 	
+	private String message;
+	
+	public MouseHandle(WorkSpace workspace) {
+		ws = workspace;
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mousePressed(MouseEvent e) {
 		dx = mx;
 		dy = my;
 		if(message == "OR") {
-			if(isSim == true) terminateSim();
-			element.add(new OrGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new OrGate(mx, my));
 		}
 		else if(message == "AND") {
-			if(isSim == true) terminateSim();
-			element.add(new AndGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new AndGate(mx, my));
 		}
 		else if(message == "VPULSE") {
-			if(isSim == true) terminateSim();
-			element.add(new VPulse(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new VPulse(mx, my));
 		}
 		else if(message == "GND") {
-			if(isSim == true) terminateSim();
-			element.add(new Ground(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new Ground(mx, my));
 		}
 		else if(message == "SWITCH") {
-			if(isSim == true) terminateSim();
-			element.add(new Switch(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new Switch(mx, my));
 		}
 		else if(message == "VDC") {
-			if(isSim == true) terminateSim();
-			element.add(new Vdc(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new Vdc(mx, my));
 		}
 		else if(message == "MONITOR") {
-			if(isSim == true) terminateSim();
-			element.add(new Monitor(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new Monitor(mx, my));
 		}
 		else if(message == "NOT") {
-			if(isSim == true) terminateSim();
-			element.add(new NotGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new NotGate(mx, my));
 		}
 		else if(message == "INPUT") {
-			if(isSim == true) terminateSim();
-			element.add(new SubCircuitInput(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new SubCircuitInput(mx, my));
 		}
 		else if(message == "OUTPUT") {
-			if(isSim == true) terminateSim();
-			element.add(new SubCircuitOutput(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new SubCircuitOutput(mx, my));
 		}
 		else if(message == "NAND") {
-			if(isSim == true) terminateSim();
-			element.add(new NandGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new NandGate(mx, my));
 		}
 		else if(message == "NOR") {
-			if(isSim == true) terminateSim();
-			element.add(new NorGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new NorGate(mx, my));
 		}
 		else if(message == "BUFFER") {
-			if(isSim == true) terminateSim();
-			element.add(new BufferGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new BufferGate(mx, my));
 		}
 		else if(message == "XOR") {
-			if(isSim == true) terminateSim();
-			element.add(new XorGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new XorGate(mx, my));
 		}
 		else if(message == "TRISTATE") {
-			if(isSim == true) terminateSim();
-			element.add(new TristateBufferGate(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new TristateBufferGate(mx, my));
 		}
 		else if(message == "TEXT") {
-			if(isSim == true) terminateSim();
-			element.add(new TextBlock(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new TextBlock(mx, my));
 		}
 		else if(message == "SEVEN") {
-			if(isSim == true) terminateSim();
-			element.add(new SevenSegment(mx, my));
+			if(ws.isSim == true) ws.terminateSim();
+			data.addElement(new SevenSegment(mx, my));
 		}
 		else if(message != null && message.endsWith("NULL")) {
 			
 		}
 		else {
 			try {
-				getSCFile(message, mx, my);
+				ws.getSCFile(message, mx, my);
 			}
 			catch(Exception exc) {
 			}
@@ -137,22 +146,26 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		}
 		
 		
-		message = nb.mouseClicked(e.getX(), e.getY());
+		message = ws.nb.mouseClicked(e.getX(), e.getY());
 		
 		
 		if(message == "SIM_START") {
-			isSim = true;
-			for(Node nn : node) {
+			ws.isSim = true;
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node nn = data.getNode(i);
 				if(nn.startSim() == false) {
-					isSim = false;
+					ws.isSim = false;
 					System.out.println("Error found at some nodes. Simulation failed!!");
 					return;
 				}
 			}
-			for(Node nn : node) {
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node nn = data.getNode(i);
 				nn.setState(Voltage.LOW);
 			}
-			for(Element ee : element) {
+			
+			for(int i = 0; i < data.elementSize(); i++) {
+				Element ee = data.getElement(i);
 				if(ee instanceof Monitor) {
 					Monitor m = (Monitor)ee;
 					m.getLinkedNode().setState(Voltage.LOW);
@@ -170,30 +183,30 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		}
 		
 		else if(message == "SIM_STEP_INTO") {
-			sim();
+			ws.sim();
 		}
 		else if(message == "SIM_10_STEP") {
-			if(isSim == false) {
+			if(ws.isSim == false) {
 				System.out.println("press STARTSIM first");
 				return;
 			}
 			for(int i = 0; i < 10; i++) {
-				sim();
+				ws.sim();
 			}
 			
 		}
 		else if(message == "SIM_CONTINUOUS") {
-			if(isSim == false) {
+			if(ws.isSim == false) {
 				System.out.println("press SIM_START first");
 				return;
 			}
-			simConti = true;
+			ws.simConti = true;
 		}
 		else if(message == "SIM_END"){
-			terminateSim();
+			ws.terminateSim();
 		}
 		else if(message == "FILE_SAVE") {
-			terminateSim();
+			ws.terminateSim();
 			JFileChooser jfc = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Digital Circuit Simulator", "dcs");
 			FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Sub Circuit", "sc");
@@ -206,10 +219,10 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 					File f = jfc.getSelectedFile();
 					FileOutputStream filestream = new FileOutputStream(f);
 					ObjectOutputStream os = new ObjectOutputStream(filestream);
-					os.writeObject(new Point2D.Double(offsetX, offsetY));
-					os.writeObject(ios);
-					os.writeObject(element);
-					os.writeObject(node);
+					os.writeObject(new Point2D.Double(ws.offsetX, ws.offsetY));
+					os.writeObject(data.getIos());
+					os.writeObject(data.getElement());
+					os.writeObject(data.getNode());
 					os.close();
 					filestream.close();
 					
@@ -241,14 +254,15 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 				
 				if(f.getAbsolutePath().endsWith(".dcs")) {
 					Point2D.Double t = (Point2D.Double)(oin.readObject());
-					offsetX = t.x;
-					offsetY = t.y;
-					ios = (ArrayList<GateIO>)(oin.readObject());
-					element = (ArrayList<Element>)(oin.readObject());
-					node = (ArrayList<Node>)(oin.readObject());
+					WorkSpace.offsetX = t.x;
+					WorkSpace.offsetY = t.y;
+					data.setIos((ArrayList<GateIO>)(oin.readObject()));
+					data.setElement((ArrayList<Element>)(oin.readObject()));
+					data.setNode((ArrayList<Node>)(oin.readObject()));
 					int inputnum = 1;
 					int outputnum = 1;
-					for(Element el : element) {
+					for(int i = 0; i < data.elementSize(); i++) {
+						Element el = data.getElement(i);
 						if(el instanceof SubCircuitInput) {
 							inputnum++;
 						}
@@ -268,10 +282,11 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 				}
 			}
 		}
-		dragBox = new Rectangle(getX(mx), getY(my), getX(mx)-getX(dx), getY(my)-getY(dy));
-		for(Element el : element) {
+		ws.dragBox = new Rectangle(ws.getX(mx), ws.getY(my), ws.getX(mx)-ws.getX(dx), ws.getY(my)-ws.getY(dy));
+		for(int i = 0; i < data.elementSize(); i++) {
+			Element el = data.getElement(i);
 			if(el.contains(mx, my)) {
-				movingOne = true;
+				ws.movingOne = true;
 			}
 			else if(el.isSelected()) {
 				
@@ -283,28 +298,30 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		int n = e.getWheelRotation();
 		if(n < 0) {
-			ratio *= 1.1;
+			ws.ratio *= 1.1;
 		}
 		else {
-			ratio *= 0.9;
+			ws.ratio *= 0.9;
 		}
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		movingOne = false;
-		if(dragBox != null) {
-			if(dragBox.isEmpty()) {
-				dragBox = null;
+		ws.movingOne = false;
+		if(ws.dragBox != null) {
+			if(ws.dragBox.isEmpty()) {
+				ws.dragBox = null;
 				return;
 			}
-			for(Element el : element) {
-				el.select(dragBox);//select elements which intersects with dragbox
+			for(int i = 0; i < data.elementSize(); i++) {
+				Element el = data.getElement(i);
+				el.select(ws.dragBox);//select elements which intersects with dragbox
 			}
-			for(Node n : node) {
-				n.select(dragBox);
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node n = data.getNode(i);
+				n.select(ws.dragBox);
 			}
-			dragBox = null;//erase dragbox
+			ws.dragBox = null;//erase dragbox
 		}
 		
 		mx = e.getX();
@@ -316,24 +333,27 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	public void mouseClicked(MouseEvent e) {
 		//bug: call node and merge itself - ConcurrentModificationException
 		//bug: double clicking one gate io - NegativeArraySizeException
-		nodeExtension();
+		ws.nodeExtension();
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		mPositionX = e.getX();
 		mPositionY = e.getY();
-		mx = getX(mPositionX);
-		my = getY(mPositionY);
+		mx = ws.getX(mPositionX);
+		my = ws.getY(mPositionY);
 		
-		if(nodeMaking == false) {
-			for(Element el : element) {
+		if(ws.nodeMaking == false) {
+			for(int i = 0; i < data.elementSize(); i++) {
+				Element el = data.getElement(i);
 				if(el.contains(mx, my) == true) break;
 			}
-			for(GateIO gio : ios) {
+			for(int i = 0; i < data.iosSize(); i++) {
+				GateIO gio = data.getIos(i);
 				gio.contains(mx, my);
 			}
-			for(Node n : node) {
+			for(int i = 0; i < data.nodeSize(); i++) {
+				Node n = data.getNode(i);
 				n.contains(mx, my);
 			}
 		}
@@ -345,15 +365,16 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		double diffy = mPositionY - e.getY();
 		mPositionX = e.getX();
 		mPositionY = e.getY();
-		dx = getX(mPositionX);
-		dy = getY(mPositionY);
+		dx = ws.getX(mPositionX);
+		dy = ws.getY(mPositionY);
 		
 		if(e.isControlDown()) {
-			offsetX += diffx;
-			offsetY += diffy;
+			ws.offsetX += diffx;
+			ws.offsetY += diffy;
 		}
-		else if(movingOne) {
-			for(Element el : element) {
+		else if(ws.movingOne) {
+			for(int i = 0; i < data.elementSize(); i++) {
+				Element el = data.getElement(i);
 				if(el.containing) {
 					el.move(dx, dy);
 					break;
@@ -361,8 +382,8 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 			}
 		}
 		else {
-			if(dragBox != null) {
-				dragBox.setRect(Calc.min(mx, dx), 
+			if(ws.dragBox != null) {
+				ws.dragBox.setRect(Calc.min(mx, dx), 
 						Calc.min(my, dy), 
 						Calc.abs(mx - dx), 
 						Calc.abs(my - dy));

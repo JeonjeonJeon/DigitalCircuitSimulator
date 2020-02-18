@@ -17,12 +17,17 @@ import java.util.List;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
+import graphic.WorkSpace;
 import main.GateIO;
 import main.Node;
 
 public class DragAndDropHandle  implements DropTargetListener {
 	
+	WorkSpace ws;
 	
+	public DragAndDropHandle(WorkSpace workspace) {
+		ws = workspace;
+	}
 
 	@Override
 	public void drop(DropTargetDropEvent dtde) { // drag and drop
