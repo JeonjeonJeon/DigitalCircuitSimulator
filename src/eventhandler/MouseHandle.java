@@ -1,7 +1,10 @@
-package eventhandle;
+package eventhandler;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import datahandler.DataHandle;
 import element.AndGate;
 import element.BufferGate;
 import element.Element;
@@ -40,7 +44,14 @@ import main.Voltage;
 
 // mouse event handler
 
-public class MouseHandle implements MouseListener, MouseMotioniListener, MouseWhellListener {
+public class MouseHandle implements MouseListener, MouseMotionListener, MouseWheelListener {
+	
+	DataHandle data = DataHandle.createInstance();
+	
+	private double mPositionX = 0, mPositionY = 0;
+	private double mx = 0, my = 0;//mouse coordinate
+	private double dx = 0, dy = 0;
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		dx = mx;

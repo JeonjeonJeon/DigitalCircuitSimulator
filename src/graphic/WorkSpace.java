@@ -5,10 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +19,7 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JPanel;
 
+import datahandler.DataHandle;
 import element.Element;
 import element.NavigationBar;
 import element.SubCircuit;
@@ -26,12 +27,12 @@ import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
+import eventhandler.DragAndDropHandle;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import window.Window;
 
 @SuppressWarnings("unchecked")
 
@@ -47,11 +48,6 @@ public class WorkSpace extends JPanel{
 	public static double offsetY = 0;
 	//offset changes (ctrl down + mouse drag) which means camera movement
 	
-	
-	
-	private double mPositionX = 0, mPositionY = 0;
-	private double mx = 0, my = 0;//mouse coordinate
-	private double dx = 0, dy = 0;
 	
 	private Node nodeTemp = null;
 	private Rectangle dragBox = null;
@@ -71,6 +67,9 @@ public class WorkSpace extends JPanel{
 	DropTarget dt; // drag and drop
 	private KeyboardHandle kbHandle = new KeyboardHandle();
 	private MouseHandle mHandle = new MouseHandle();
+	private DragAndDropHandle dnd = new DragAndDropHandle();
+	
+	private DataHandle data = DataHandle.createInstance();
 	
 	public WorkSpace() {
 		super();
@@ -81,10 +80,7 @@ public class WorkSpace extends JPanel{
 		addKeyListener(kbHandle);
 		addMouseMotionListener(mHandle);
 		addMouseWheelListener(mHandle);
-		dt = new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, this, true, null);
-		
-		//sc.init(3, 3, null, null, null);
-		//element.add(sc);
+		dt = new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, dnd, true, null);
 		
 	}
 	

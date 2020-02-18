@@ -15,7 +15,7 @@ import main.Node;
 
 // keyboard event handler
 
-public class Keyboard implements KeyListener {
+public class KeyboardHandle implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

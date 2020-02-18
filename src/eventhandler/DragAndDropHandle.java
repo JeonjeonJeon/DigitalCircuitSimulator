@@ -22,8 +22,9 @@ import main.Node;
 
 public class DragAndDropHandle  implements DropTargetListener {
 	
-@Override
 	
+
+	@Override
 	public void drop(DropTargetDropEvent dtde) { // drag and drop
 		if((dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) != 0) {
 			dtde.acceptDrop(dtde.getDropAction());

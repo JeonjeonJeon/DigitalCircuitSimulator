@@ -8,11 +8,11 @@ import main.Node;
 
 public class DataHandle {
 	
-	public static DataHandle dh;
+	public static DataHandle data;
 	
-	public static ArrayList<Element> element;
-	public static ArrayList<GateIO> ios;
-	public static ArrayList<Node> node;
+	public ArrayList<Element> element;
+	public ArrayList<GateIO> ios;
+	public ArrayList<Node> node;
 	
 	private DataHandle() {
 		element = new ArrayList<Element>();
@@ -21,7 +21,7 @@ public class DataHandle {
 	}
 	
 	public static DataHandle createInstance() {
-		if(dh == null) dh = new DataHandle();
-		return dh;
+		if(data == null) data = new DataHandle();
+		return data;
 	}
 }
