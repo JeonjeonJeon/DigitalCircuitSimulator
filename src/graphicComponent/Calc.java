@@ -3,7 +3,7 @@ package graphicComponent;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
-import window.WorkSpace;
+import graphic.WorkSpace;
 
 public class Calc {
 	

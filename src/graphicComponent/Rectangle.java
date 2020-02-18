@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import window.WorkSpace;
+import graphic.WorkSpace;
 
 public class Rectangle implements Serializable{
 	private static final long serialVersionUID = 2600811281250071161L;

@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.io.Serializable;
 
-import window.WorkSpace;
+import graphic.WorkSpace;
 
 public class Line implements Serializable{
 	private static final long serialVersionUID = -109243898914932421L;

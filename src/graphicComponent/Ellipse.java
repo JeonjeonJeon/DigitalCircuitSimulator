@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
-import window.WorkSpace;
+import graphic.WorkSpace;
 
 public class Ellipse implements Serializable{
 	private static final long serialVersionUID = 1357878472848882181L;
