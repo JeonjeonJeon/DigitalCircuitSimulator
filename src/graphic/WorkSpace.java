@@ -1,4 +1,4 @@
-package window;
+package graphic;
 
 import java.awt.BasicStroke;
 import java.awt.Canvas;
@@ -58,7 +58,7 @@ import element.TristateBufferGate;
 import element.VPulse;
 import element.Vdc;
 import element.XorGate;
-import main.DigitalCircuitSimulator;
+import main.Main;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
