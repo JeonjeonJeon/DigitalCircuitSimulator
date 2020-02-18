@@ -47,9 +47,7 @@ public class WorkSpace extends JPanel{
 	public static double offsetY = 0;
 	//offset changes (ctrl down + mouse drag) which means camera movement
 	
-	public static ArrayList<Element> element = new ArrayList<Element>();
-	public static ArrayList<GateIO> ios = new ArrayList<GateIO>();
-	public static ArrayList<Node> node = new ArrayList<Node>();
+	
 	
 	private double mPositionX = 0, mPositionY = 0;
 	private double mx = 0, my = 0;//mouse coordinate
