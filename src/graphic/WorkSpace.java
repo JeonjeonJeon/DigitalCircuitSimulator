@@ -58,12 +58,13 @@ import element.TristateBufferGate;
 import element.VPulse;
 import element.Vdc;
 import element.XorGate;
-import main.Main;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
 import util.Calc;
 import util.Rectangle;
+import window.NavigationBar;
+import window.Window;
 
 @SuppressWarnings("unchecked")
 

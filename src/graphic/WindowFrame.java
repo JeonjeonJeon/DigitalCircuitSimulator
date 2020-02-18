@@ -3,11 +3,11 @@ package graphic;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 
-public class WindowFrame extends Graphic {
-	private JFrame jf;
+import main.Property;
+
+public class WindowFrame extends JFrame implements Frame {
 	public WindowFrame(String name){
-		ws = new WorkSpace();
-		jf = new JFrame(name);
+		super(name);
 		SpringLayout sl = new SpringLayout();
 
 		jf.setBounds(100, 100, Property.WIDTH, Property.HEIGHT);
