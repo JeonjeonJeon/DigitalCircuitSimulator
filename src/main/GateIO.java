@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 
+import graphic.WorkSpace;
 import graphicComponent.Rectangle;
-import window.WorkSpace;
 
 public class GateIO implements Serializable{
 	private static final long serialVersionUID = 1257751337468471814L;

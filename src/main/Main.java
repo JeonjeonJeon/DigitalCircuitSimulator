@@ -1,8 +1,6 @@
 package main;
 
 import graphic.Graphic;
-import graphic.LinuxFrame;
-import graphic.WindowsFrame;
 
 public class Main {
 	/* variables related to frame counter */
@@ -18,7 +16,7 @@ public class Main {
 	public static boolean FPS_LOCK = true;
 	public Graphic graphic;
 	
-	public DigitalCircuitSimulator() {
+	public Main() {
 		Class c = Property.isLinux() ? Class.forName("LinuxFrame") : Class.forName("WindowFrame");
 		graphic = (Graphic)c.newInstance();
 	}

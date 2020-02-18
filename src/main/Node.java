@@ -5,10 +5,10 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import graphic.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Line;
 import graphicComponent.Rectangle;
-import window.WorkSpace;
 
 public class Node implements Serializable{
 	private static final long serialVersionUID = 6737281024992084310L;
