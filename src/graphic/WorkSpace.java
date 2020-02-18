@@ -67,10 +67,10 @@ import eventhandler.KeyboardHandle;
 
 @SuppressWarnings("unchecked")
 
-public class WorkSpace extends Canvas implements DropTargetListener {
+public class WorkSpace extends Canvas{
 	private static final long serialVersionUID = 3147910908867708447L;
 	private final String version = "190203";
-	DropTarget dt; // drag and drop
+	
 	
 	public static double ratio = 2; //increased or decreased when size of work space changes
 	public static final double coordinateInterval = 10; //pixels between coordinate is coordinateInterval*ratio 
@@ -102,6 +102,7 @@ public class WorkSpace extends Canvas implements DropTargetListener {
 	
 	//SubCircuit sc = new SubCircuit(7, 7);
 	
+	DropTarget dt; // drag and drop
 	private KeyboardHandle kbHandle = new KeyboardHandle();
 	private MouseHandle mHandle = new MouseHandle();
 	
