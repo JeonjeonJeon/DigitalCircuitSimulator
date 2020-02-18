@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import main.GateIO;
-import window.WorkSpace;
 
 public class SubCircuitOutput extends Element {
 	private static final long serialVersionUID = -307844545053060804L;
@@ -18,7 +17,7 @@ public class SubCircuitOutput extends Element {
 	public SubCircuitOutput(double coorx, double coory) {
 		super(coorx, coory);
 		input = new GateIO(coordx, coordy + 1, 3);
-		WorkSpace.ios.add(input);
+		data.addGateIO(input);
 		individualNum = num;
 		num++;
 	}
@@ -45,7 +44,7 @@ public class SubCircuitOutput extends Element {
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(input);	
+		data.removeGateIO(input);	
 	}
 
 	@Override

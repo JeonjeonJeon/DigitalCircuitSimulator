@@ -119,4 +119,11 @@ public class DataHandle {
 	public void removeNode(int i) {
 		node.remove(node.get(i));
 	}
+	
+//////////////////////////////////////////////////////////
+	
+	public void removeAll(ArrayList<GateIO> i) {
+		ios.removeAll(i);
+	}
+	
 }

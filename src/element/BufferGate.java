@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 
 import main.GateIO;
 import main.Voltage;
-import window.WorkSpace;
 
 public class BufferGate extends Element {
 	private static final long serialVersionUID = 3348466536787374449L;
@@ -17,8 +16,8 @@ public class BufferGate extends Element {
 		super(coorx, coory);
 		output = new GateIO(coordx + 4, coordy + 2, 1);
 		input = new GateIO(coordx, coordy+2, 0);
-		WorkSpace.ios.add(output);
-		WorkSpace.ios.add(input);
+		data.addGateIO(output);
+		data.addGateIO(input);
 	}
 
 	@Override
@@ -41,8 +40,8 @@ public class BufferGate extends Element {
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(output);
-		WorkSpace.ios.remove(input);
+		data.removeGateIO(output);
+		data.removeGateIO(input);
 	}
 
 	@Override

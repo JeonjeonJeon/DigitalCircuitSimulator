@@ -6,12 +6,15 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
 import java.io.Serializable;
 
+import datahandler.DataHandle;
+import graphic.WorkSpace;
 import graphicComponent.Rectangle;
 import main.Voltage;
-import window.WorkSpace;
 
 public abstract class Element implements Serializable{
 	private static final long serialVersionUID = -2357157647420824090L;
+	
+	DataHandle data;
 	
 	double coordx = 0; // position of logic gate
 	double coordy = 0;
@@ -25,6 +28,7 @@ public abstract class Element implements Serializable{
 		coordx = coorx;
 		coordy = coory;
 		bound = new Rectangle();
+		data = DataHandle.createInstance();
 	}
 
 	public void paint(Graphics2D g) {

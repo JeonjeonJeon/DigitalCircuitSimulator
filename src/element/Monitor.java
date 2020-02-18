@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import window.WorkSpace;
 
 public class Monitor extends Element {
 	private static final long serialVersionUID = -8193793001401432150L;
@@ -18,7 +17,7 @@ public class Monitor extends Element {
 	public Monitor(double coorx, double coory) {
 		super(coorx, coory);
 		input = new GateIO(coordx, coordy + 1, 0);
-		WorkSpace.ios.add(input);
+		data.addGateIO(input);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class Monitor extends Element {
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(input);	
+		data.removeGateIO(input);	
 	}
 
 	@Override

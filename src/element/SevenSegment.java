@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 
 import main.GateIO;
 import main.Voltage;
-import window.WorkSpace;
 
 public class SevenSegment extends Element{
 
@@ -23,7 +22,7 @@ public class SevenSegment extends Element{
 		output = new Color[7];
 		for(int i = 0; i < 4; i++) {
 			input[i]= new GateIO(coordx, coordy + 1 + i, 0);
-			WorkSpace.ios.add(input[i]);
+			data.addGateIO(input[i]);
 		}
 		for(int i = 0; i < 7; i++) {
 			output[i] = new Color(0, 0, 0);
@@ -73,7 +72,7 @@ public class SevenSegment extends Element{
 	@Override
 	public void removeData() {
 		for(int i = 0; i < 4; i++) {
-			WorkSpace.ios.remove(input[i]);	
+			data.removeGateIO(input[i]);	
 		}
 		
 	}

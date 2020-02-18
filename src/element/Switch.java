@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import main.GateIO;
-import window.WorkSpace;
 
 public class Switch extends Element{
 	private static final long serialVersionUID = 25425022349291189L;
@@ -18,8 +17,8 @@ public class Switch extends Element{
 		super(coorx, coory);
 		left = new GateIO(coordx, coordy + 1, 0);
 		right = new GateIO(coordx + 3, coordy + 1, 0);
-		WorkSpace.ios.add(left);
-		WorkSpace.ios.add(right);
+		data.addGateIO(left);
+		data.addGateIO(right);
 	}
 
 	@Override
@@ -46,8 +45,8 @@ public class Switch extends Element{
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(right);
-		WorkSpace.ios.remove(left);
+		data.removeGateIO(right);
+		data.removeGateIO(left);
 	}
 
 	@Override

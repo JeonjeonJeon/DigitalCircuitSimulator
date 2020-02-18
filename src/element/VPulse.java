@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import graphicComponent.Calc;
-import main.DigitalCircuitSimulator;
 import main.GateIO;
+import main.Main;
 import main.Voltage;
-import window.WorkSpace;
 
 public class VPulse extends Element{
 	private static final long serialVersionUID = -2265231577538159525L;
@@ -15,14 +14,14 @@ public class VPulse extends Element{
 	
 	GateIO output;
 	private double pulseWidth = 1;
-	private double pulseCount = DigitalCircuitSimulator.FPS;
+	private double pulseCount = Main.FPS;
 	private boolean outputHigh = true;
 	
 	
 	public VPulse(double coorx, double coory) {
 		super(coorx, coory);
 		output = new GateIO(coordx + 1, coordy, 2);
-		WorkSpace.ios.add(output);
+		data.addGateIO(output);
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class VPulse extends Element{
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(output);	
+		data.removeGateIO(output);	
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public class VPulse extends Element{
 		output.setState(internalState);
 		pulseCount--;
 		if(pulseCount <= 0) {
-			pulseCount = DigitalCircuitSimulator.FPS * pulseWidth;
+			pulseCount = Main.FPS * pulseWidth;
 			outputHigh = !outputHigh;
 		}
 	}
