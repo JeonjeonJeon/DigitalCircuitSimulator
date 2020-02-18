@@ -3,6 +3,7 @@ package eventhandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import datahandler.DataHandle;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
@@ -12,6 +13,7 @@ import element.VPulse;
 import element.Vdc;
 import graphic.WorkSpace;
 import main.GateIO;
+import main.Main;
 import main.Node;
 
 // keyboard event handler
@@ -19,6 +21,9 @@ import main.Node;
 public class KeyboardHandle implements KeyListener {
 	
 	WorkSpace ws;
+	DataHandle data = DataHandle.createInstance();
+	
+	int mx, my;
 	
 	public KeyboardHandle(WorkSpace workspace) {
 		ws = workspace;
@@ -27,7 +32,8 @@ public class KeyboardHandle implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-		for(Element ee : element) {
+		for(int i = 0; i < data.elementSize(); i++) { 
+			Element ee = data.getElement(i); 
 			if(ee.contains(mx, my)) {
 				if(ee instanceof SubCircuitInput) {
 					SubCircuitInput sci = (SubCircuitInput) ee;
@@ -53,13 +59,13 @@ public class KeyboardHandle implements KeyListener {
 			}
 		}
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			ratio *= 1.1;
+			ws.ratio *= 1.1;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			ratio *= 0.9;
+			ws.ratio *= 0.9;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			for(Element ee : element) {
+			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i); 
 				if(ee.contains(mx, my)) {
 					if(ee instanceof VPulse) {
 						VPulse vp = (VPulse) ee;
@@ -69,7 +75,7 @@ public class KeyboardHandle implements KeyListener {
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			for(Element ee : element) {
+			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 				if(ee.contains(mx, my)) {
 					if(ee instanceof VPulse) {
 						VPulse vp = (VPulse) ee;
@@ -80,53 +86,54 @@ public class KeyboardHandle implements KeyListener {
 		}
 		else if(e.isControlDown() == true) {
 			if(e.getKeyCode() == KeyEvent.VK_C) {
-				for(Element ee : element) {
+				for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 					if(ee.isSelected() == true) {
-						ctrlCV = ee;
+						ws.ctrlCV = ee;
 						return;
 					}
 				}
 			}
 			else if(e.getKeyCode() == KeyEvent.VK_V) {
-				if(ctrlCV != null) {
-					Element copied = ctrlCV.copy();
-					copied.move(ctrlCV.getX() + 2, ctrlCV.getY() + 4);
-					ctrlCV = copied;
-					element.add(copied);
+				if(ws.ctrlCV != null) {
+					Element copied = ws.ctrlCV.copy();
+					copied.move(ws.ctrlCV.getX() + 2, ws.ctrlCV.getY() + 4);
+					ws.ctrlCV = copied;
+					data.addElement(copied);
 				}
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_H) {
-			statusHide = !statusHide;
+			ws.statusHide = !ws.statusHide;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_L) {
-			DigitalCircuitSimulator.FPS_LOCK = !DigitalCircuitSimulator.FPS_LOCK;
+			Main.FPS_LOCK = !Main.FPS_LOCK;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_W) {
-			nodeExtension();
+			ws.nodeExtension();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			sim();
+			ws.sim();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_P) {
-			for(Element ee : element) {
+			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 				if(ee.contains(mx, my)) {
 					System.out.println(ee.toString());
 				}
 			}
-			for(Node nn : node) {
+			for(int i = 0; i < data.nodeSize(); i++) {
+			Node nn = data.getNode(i);
 				if(nn.contains(mx, my)) {
 					System.out.println(nn.toString());
 				}
 			}
-			for(GateIO io : ios) {
+			for(int i = 0; i < data.iosSize(); i++) { GateIO io = data.getIos(i); 
 				if(io.contains(mx, my)) {
 					System.out.println(io.toString());
 				}
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_C) {
-			for(Element ee : element) {
+			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 				if(ee instanceof Switch) {
 					Switch ss = (Switch)ee;
 					if(ss.contains(mx, my)) ss.changeStatus();
@@ -142,27 +149,27 @@ public class KeyboardHandle implements KeyListener {
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DELETE) {
-			for(int i = 0 ; i < element.size() ; i++) {
-				if(element.get(i).isSelected()) {
-					element.get(i).removeData();
-					element.remove(i);
+			for(int i = 0 ; i < data.elementSize() ; i++) {
+				if(data.getElement(i).isSelected()) {
+					data.removeElement(i);
 					i--;
 				}
 			}
-			for(int i = 0 ; i < node.size(); i++) {
-				if(node.get(i).isSelected()) {
-					for(GateIO io : ios) {
-						if(io.isLinked() && io.getNode().equals(node.get(i))) {
+			for(int i = 0 ; i < data.nodeSize(); i++) {
+				if(data.getNode(i).isSelected()) {
+					for(int j = 0; j < data.iosSize(); j++) { 
+						GateIO io = data.getIos(j); 
+						if(io.isLinked() && io.getNode().equals(data.getNode(i))) {
 							io.setNode(null);
 						}
 					} 
-					node.remove(i);
+					data.removeNode(i);
 					i--;
 				}
 			}
 		}
 		
-		nb.keyPressed(e.getKeyCode());
+		ws.nb.keyPressed(e.getKeyCode());
 	}
 	
 	

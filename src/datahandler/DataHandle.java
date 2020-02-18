@@ -96,6 +96,7 @@ public class DataHandle {
 ///////////////////////////////////////////////////////////
 	
 	public void removeElement(Element e) {
+		e.removeData();
 		element.remove(e);
 	}
 	public void removeGateIO(GateIO gio) {
@@ -103,5 +104,19 @@ public class DataHandle {
 	}
 	public void removeNode(Node nodeTemp) {
 		node.remove(nodeTemp);
+	}
+	
+///////////////////////////////////////////////////////////
+	
+	public void removeElement(int i) {
+		Element e = element.get(i);
+		e.removeData();
+		element.remove(e);
+	}
+	public void removeGateIO(int i) {
+		ios.remove(ios.get(i));
+	}
+	public void removeNode(int i) {
+		node.remove(node.get(i));
 	}
 }
