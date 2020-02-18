@@ -1,6 +1,7 @@
 package eventhandler;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import element.Element;
 import element.SubCircuitInput;
@@ -15,6 +16,7 @@ import main.Node;
 // keyboard event handler
 
 public class Keyboard implements KeyListener {
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		

@@ -1,61 +1,30 @@
 package graphic;
 
 import java.awt.BasicStroke;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JPanel;
 
-import element.AndGate;
-import element.BufferGate;
 import element.Element;
-import element.Ground;
-import element.Monitor;
-import element.NandGate;
-import element.NorGate;
-import element.NotGate;
-import element.OrGate;
-import element.SevenSegment;
 import element.SubCircuit;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
-import element.Switch;
-import element.TextBlock;
-import element.TristateBufferGate;
-import element.VPulse;
-import element.Vdc;
-import element.XorGate;
+import eventhandler.KeyboardHandle;
+import eventhandler.MouseHandle;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
@@ -63,11 +32,10 @@ import util.Calc;
 import util.Rectangle;
 import window.NavigationBar;
 import window.Window;
-import eventhandler.KeyboardHandle;
 
 @SuppressWarnings("unchecked")
 
-public class WorkSpace extends Canvas{
+public class WorkSpace extends JPanel{
 	private static final long serialVersionUID = 3147910908867708447L;
 	private final String version = "190203";
 	
@@ -123,13 +91,10 @@ public class WorkSpace extends Canvas{
 	}
 	
 	public void render(int fps) {
-		BufferStrategy bs = this.getBufferStrategy();
-		if(bs == null) {
-			this.createBufferStrategy(3);
-			return;
-		}
-		Graphics g = bs.getDrawGraphics();
+		
+		Graphics g = this.getGraphics();
 		Graphics2D gg = (Graphics2D)g;
+		
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT); 
 		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -163,7 +128,6 @@ public class WorkSpace extends Canvas{
 		nb.mouseOver(mPositionX, mPositionY);
 		
 		g.dispose();
-		bs.show();
 	}
 	
 	public void paintComponent(Graphics2D g) throws ConcurrentModificationException {
@@ -241,50 +205,7 @@ public class WorkSpace extends Canvas{
 	
 	
 	
-	@Override
 	
-	public void drop(DropTargetDropEvent dtde) { // drag and drop
-		if((dtde.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) != 0) {
-			dtde.acceptDrop(dtde.getDropAction());
-			Transferable tr = dtde.getTransferable();
-			try {
-				List<File> list = (List<File>) tr.getTransferData(DataFlavor.javaFileListFlavor);
-				
-				File f = list.get(0);
-				FileInputStream in = new FileInputStream(f);
-				ObjectInputStream oin = new ObjectInputStream(in);
-				
-				if(f.getAbsolutePath().endsWith(".dcs")) {
-					
-					Point2D.Double t = (Point2D.Double)(oin.readObject());
-					offsetX = t.x;
-					offsetY = t.y;
-					ios = (ArrayList<GateIO>)(oin.readObject());
-					element = (ArrayList<Element>)(oin.readObject());
-					node = (ArrayList<Node>)(oin.readObject());
-					int inputnum = 1;
-					int outputnum = 1;
-					for(Element el : element) {
-						if(el instanceof SubCircuitInput) {
-							inputnum++;
-						}
-						else if(el instanceof SubCircuitOutput) {
-							outputnum++;
-						}
-					}
-					SubCircuitInput.num = inputnum;
-					SubCircuitOutput.num = outputnum;
-					oin.close();
-				}
-				else if(f.getAbsolutePath().endsWith(".sc")) {
-					getSCFile(f.getAbsolutePath(), getX(dtde.getLocation().x), getY(dtde.getLocation().y));
-				}
-				
-			}catch(Exception eeeee) {
-				eeeee.printStackTrace();
-			}
-		}
-	}
 	
 	public void getSCFile(String link, double mousex, double mousey) throws FileNotFoundException, IOException, ClassNotFoundException{
 		SubCircuit sc = new SubCircuit(mousex, mousey);
@@ -362,18 +283,5 @@ public class WorkSpace extends Canvas{
 	}
 	
 	
-	@Override
-	public void dragEnter(DropTargetDragEvent dtde) {
-	}
-	@Override
-	public void dragExit(DropTargetEvent dte) {
-	}
-	@Override
-	public void dragOver(DropTargetDragEvent dtde) {
-		
-	}
-	@Override
-	public void dropActionChanged(DropTargetDragEvent dtde) {
-		
-	}
+	
 }
