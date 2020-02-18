@@ -40,7 +40,6 @@ public class WorkSpace extends JPanel{
 	private static final long serialVersionUID = 3147910908867708447L;
 	private final String version = "190203";
 	
-	
 	public static double ratio = 2; //increased or decreased when size of work space changes
 	public static final double coordinateInterval = 10; //pixels between coordinate is coordinateInterval*ratio 
 
@@ -101,10 +100,10 @@ public class WorkSpace extends JPanel{
 			int lineNum = 12;
 			g.drawString("Ver." + version, 0, lineNum); 	lineNum += 12;
 			g.drawString("fps: " + fps, 0, lineNum); 	lineNum += 12;
-			g.drawString("elements: " + element.size(), 0, lineNum);	lineNum += 12;
-			g.drawString("nodes: " + node.size(), 0, lineNum);			lineNum += 12;
-			g.drawString("gate io: " + ios.size(), 0, lineNum);			lineNum += 12;
-			g.drawString("mouse: (" + mx + ", " + my + ") / (" + dx + ", " + dy + ")", 0, lineNum);	lineNum += 12;
+			g.drawString("elements: " + data.elementSize(), 0, lineNum);	lineNum += 12;
+			g.drawString("nodes: " + data.nodeSize(), 0, lineNum);			lineNum += 12;
+			g.drawString("gate io: " + data.iosSize(), 0, lineNum);			lineNum += 12;
+			g.drawString("mouse: (" + mHandle.mx + ", " + mHandle.my + ") / (" + mHandle.dx + ", " + mHandle.dy + ")", 0, lineNum);	lineNum += 12;
 			g.drawString("offset: (" + offsetX + ", " + offsetY + ")", 0, lineNum);	lineNum += 12;
 			//g.drawString("element1Pos: (" + element.get(0).getX() + ", " + element.get(0).getY() + ")", 0, lineNum); lineNum += 12;	
 			if(dragBox == null) g.drawString("dragbox: null", 0, lineNum);
@@ -119,22 +118,22 @@ public class WorkSpace extends JPanel{
 		
 		paintComponent(gg);
 		nb.paint(gg);
-		nb.mouseOver(mPositionX, mPositionY);
+		nb.mouseOver(mHandle.mPositionX, mHandle.mPositionY);
 		
 		g.dispose();
 	}
 	
 	public void paintComponent(Graphics2D g) throws ConcurrentModificationException {
 		
-		for(int i = 0; i < element.size(); i++) {
-			element.get(i).paint(g);
+		for(int i = 0; i < data.elementSize(); i++) {
+			data.getElement(i).paint(g);
 		}
 		
-		for(int i = 0 ; i< node.size(); i++) {
-			node.get(i).paint(g, mx, my);
+		for(int i = 0 ; i< data.nodeSize(); i++) {
+			data.getNode(i).paint(g, mHandle.mx, mHandle.my);
 		}
 		
-		if(nodeTemp != null) nodeTemp.paint(g, mx, my);
+		if(nodeTemp != null) nodeTemp.paint(g, mHandle.mx, mHandle.my);
 		
 		g.setColor(Color.GREEN);
 		if(dragBox != null) dragBox.draw(g);//draw drag box
@@ -168,9 +167,6 @@ public class WorkSpace extends JPanel{
 	}
 	
 	
-
-	
-
 	public void terminateSim() {
 		if(isSim == false) {
 			System.out.println("press STARTSIM first");
@@ -178,8 +174,8 @@ public class WorkSpace extends JPanel{
 		}
 		isSim = false;
 		simConti = false;
-		for(Node nn : node) {
-			nn.setState(Voltage.LOW);
+		for(int i = 0; i < data.nodeSize(); i++) {
+			data.getNode(i).setState(Voltage.LOW);
 		}
 	}
 	public void sim() {
@@ -187,20 +183,15 @@ public class WorkSpace extends JPanel{
 			System.out.println("press STARTSIM first");
 			return;
 		}
-		for(Element ee : element) {
-			ee.sim1();
+		
+		for(int i = 0; i < data.elementSize(); i++) {
+			data.getElement(i).sim1();
 		}
-		for(Element ee : element) {
-			ee.sim2();
+		for(int i = 0; i < data.elementSize(); i++) {
+			data.getElement(i).sim2();
 		}
 	}
 
-	
-	
-	
-	
-	
-	
 	public void getSCFile(String link, double mousex, double mousey) throws FileNotFoundException, IOException, ClassNotFoundException{
 		SubCircuit sc = new SubCircuit(mousex, mousey);
 		File f = new File(link);
@@ -218,12 +209,10 @@ public class WorkSpace extends JPanel{
 			else if(el.get(i) instanceof SubCircuitOutput) tempOut++;
 		}
 		sc.init(tempIn, tempOut, el, gio, no, f.getName().split("\\.")[0]);
-		element.add(sc);
+		data.addElement(sc);
 		oin.close();
 	}
 
-	
-	
 	private void nodeExtension() {
 		if(nodeMaking == true) {
 			for(Node n : node) {
@@ -275,7 +264,118 @@ public class WorkSpace extends JPanel{
 	public double getY(double ny) {
 		return Calc.stickY(ny);
 	}
-	
-	
-	
 }
+
+
+
+
+/*
+ * 
+ * 
+ * example of drawing object using JPanel (not canvas)
+
+import javax.swing.*;
+import java.awt.*;
+
+public class MyClass implements Runnable
+{
+   private JFrame mainFrame;
+   private JPanel drawingPanel;   
+   private boolean running;
+
+   private Rectangle rect;
+   private int xDirection;
+   private int yDirection;
+   private int xSpeed;
+   private int ySpeed;
+   
+   public MyClass()
+   {
+      rect = new Rectangle(50, 50, 50, 50);
+
+      mainFrame = new JFrame("Test");
+      drawingPanel = new DrawingPanel();
+      drawingPanel.setPreferredSize(new Dimension(640, 480));
+      mainFrame.setContentPane(drawingPanel);
+      mainFrame.pack();
+      mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      mainFrame.setVisible(true);
+      
+      xDirection = 1;
+      yDirection = 1;
+      xSpeed = 2;
+      ySpeed = 2;
+      Thread mainLoop = new Thread(this);
+      mainLoop.start();
+   }
+
+   public void run()
+   {
+      running = true;
+      while(running)
+      {
+         updatePositions();
+         drawingPanel.repaint();
+         try
+         {
+            Thread.sleep(15);
+         } catch(InterruptedException ex) {
+            ex.printStackTrace();
+         }
+      }
+   }
+
+   private void updatePositions()
+   {
+      rect.x += xDirection*xSpeed;
+      rect.y += yDirection*ySpeed;
+      
+      if(rect.x < 0)
+      {
+         rect.x = 0;
+         xDirection = 1;
+      }
+      else if(rect.x+rect.width > drawingPanel.getWidth())
+      {
+         rect.x = drawingPanel.getWidth()-rect.width;
+         xDirection = -1;
+      }
+
+      if(rect.y < 0)
+      {
+         rect.y = 0;
+         yDirection = 1;
+      }
+      else if(rect.y+rect.height > drawingPanel.getHeight())
+      {
+         rect.y = drawingPanel.getHeight()-rect.height;
+         yDirection = -1;
+      }
+   }
+   
+   public static void main(String[] args)
+   {
+      new MyClass();
+   }
+
+   class DrawingPanel extends JPanel
+   {
+      public void paintComponent(Graphics g)
+      {
+         super.paintComponent(g);
+         Graphics2D g2 = (Graphics2D)g;
+         
+         //draw black background
+         g2.setColor(Color.BLACK);
+         g2.fillRect(0, 0, drawingPanel.getWidth(),  drawingPanel.getHeight());
+         
+         //draw red rectangle
+         g2.setColor(Color.RED);
+         g2.fillRect(rect.x, rect.y, rect.width, rect.height);
+      }
+   }
+}
+
+
+
+*/

@@ -48,9 +48,9 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	
 	DataHandle data = DataHandle.createInstance();
 	
-	private double mPositionX = 0, mPositionY = 0;
-	private double mx = 0, my = 0;//mouse coordinate
-	private double dx = 0, dy = 0;
+	public double mPositionX = 0, mPositionY = 0;
+	public double mx = 0, my = 0;//mouse coordinate
+	public double dx = 0, dy = 0;
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
