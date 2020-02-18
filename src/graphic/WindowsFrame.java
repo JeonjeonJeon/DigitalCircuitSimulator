@@ -6,8 +6,12 @@ import javax.swing.SpringLayout;
 import main.Property;
 
 public class WindowsFrame extends JFrame implements Frame {
+	
+	WorkSpace ws;
+	
 	public WindowsFrame(String name){
 		super(name);
+		ws = new WorkSpace();
 		SpringLayout sl = new SpringLayout();
 
 		setBounds(100, 100, Property.WIDTH, Property.HEIGHT);
