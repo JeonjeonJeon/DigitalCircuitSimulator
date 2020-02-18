@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
-import util.Calc;
+import graphicComponent.Calc;
 
 public class NavigationBar {
 	

@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import graphicComponent.Calc;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import util.Calc;
 import window.WorkSpace;
 
 public class SubCircuit extends Element {

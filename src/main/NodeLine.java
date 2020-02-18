@@ -3,9 +3,9 @@ package main;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 
-import util.Calc;
-import util.Ellipse;
-import util.Line;
+import graphicComponent.Calc;
+import graphicComponent.Ellipse;
+import graphicComponent.Line;
 
 
 public class NodeLine implements Serializable{

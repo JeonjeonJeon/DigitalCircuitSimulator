@@ -32,11 +32,11 @@ import element.TristateBufferGate;
 import element.VPulse;
 import element.Vdc;
 import element.XorGate;
+import graphicComponent.Calc;
+import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import util.Calc;
-import util.Rectangle;
 
 // mouse event handler
 

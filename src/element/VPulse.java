@@ -3,10 +3,10 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import graphicComponent.Calc;
 import main.DigitalCircuitSimulator;
 import main.GateIO;
 import main.Voltage;
-import util.Calc;
 import window.WorkSpace;
 
 public class VPulse extends Element{

@@ -25,11 +25,11 @@ import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
+import graphicComponent.Calc;
+import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import util.Calc;
-import util.Rectangle;
 import window.NavigationBar;
 import window.Window;
 

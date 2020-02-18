@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import util.Calc;
-import util.Line;
-import util.Rectangle;
+import graphicComponent.Calc;
+import graphicComponent.Line;
+import graphicComponent.Rectangle;
 import window.WorkSpace;
 
 public class Node implements Serializable{
