@@ -20,6 +20,7 @@ import java.util.ConcurrentModificationException;
 import javax.swing.JPanel;
 
 import element.Element;
+import element.NavigationBar;
 import element.SubCircuit;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
@@ -30,7 +31,6 @@ import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import window.NavigationBar;
 import window.Window;
 
 @SuppressWarnings("unchecked")
