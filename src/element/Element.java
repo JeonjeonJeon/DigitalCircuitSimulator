@@ -28,7 +28,7 @@ public abstract class Element implements Serializable{
 		coordx = coorx;
 		coordy = coory;
 		bound = new Rectangle();
-		data = DataHandle.createInstance();
+		data = DataHandle.getInstance();
 	}
 
 	public void paint(Graphics2D g) {

@@ -14,7 +14,7 @@ public class VPulse extends Element{
 	
 	GateIO output;
 	private double pulseWidth = 1;
-	private double pulseCount = Main.FPS;
+	private double pulseCount = 0;
 	private boolean outputHigh = true;
 	
 	
@@ -80,7 +80,7 @@ public class VPulse extends Element{
 		output.setState(internalState);
 		pulseCount--;
 		if(pulseCount <= 0) {
-			pulseCount = Main.FPS * pulseWidth;
+			pulseCount = 60 * pulseWidth; // 60 originally fps
 			outputHigh = !outputHigh;
 		}
 	}

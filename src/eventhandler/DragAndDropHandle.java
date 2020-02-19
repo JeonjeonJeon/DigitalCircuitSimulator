@@ -25,7 +25,7 @@ import main.Node;
 public class DragAndDropHandle  implements DropTargetListener {
 	
 	WorkSpace ws;
-	DataHandle data = DataHandle.createInstance();
+	DataHandle data = DataHandle.getInstance();
 	
 	public DragAndDropHandle(WorkSpace workspace) {
 		ws = workspace;

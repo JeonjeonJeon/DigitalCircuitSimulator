@@ -68,7 +68,7 @@ public class WorkSpace extends JPanel{
 	private MouseHandle mHandle = new MouseHandle(this);
 	private DragAndDropHandle dnd = new DragAndDropHandle(this);
 	
-	private DataHandle data = DataHandle.createInstance();
+	private DataHandle data = DataHandle.getInstance();
 	
 	public WorkSpace() {
 		super();

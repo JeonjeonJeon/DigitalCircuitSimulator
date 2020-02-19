@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import datahandler.DataHandle;
 import graphic.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Line;
@@ -13,6 +14,7 @@ import graphicComponent.Rectangle;
 public class Node implements Serializable{
 	private static final long serialVersionUID = 6737281024992084310L;
 	
+	DataHandle data = DataHandle.getInstance();
 	
 	double coordx = 0;
 	double coordy = 0;
@@ -38,7 +40,7 @@ public class Node implements Serializable{
 		for(NodeLine nl : nodeTemp.lines) {
 			lines.add(nl);
 		}
-		for(GateIO io : WorkSpace.ios) {
+		for(GateIO io : data.getIos()) {
 			if(io.getNode() != null && io.getNode().equals(nodeTemp)){
 				io.setNode(this);
 			}
@@ -131,7 +133,7 @@ public class Node implements Serializable{
 	public boolean startSim() {
 		int sum = 0;
 		int count = 0;
-		for(GateIO io : WorkSpace.ios) {
+		for(GateIO io : data.getIos()) {
 			if(io.getNode().equals(this)) {
 				if(io.getPriority() == 1) count++;
 				sum += io.getPriority();

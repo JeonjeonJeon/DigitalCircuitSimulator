@@ -21,7 +21,7 @@ import main.Node;
 public class KeyboardHandle implements KeyListener {
 	
 	WorkSpace ws;
-	DataHandle data = DataHandle.createInstance();
+	DataHandle data = DataHandle.getInstance();
 	
 	int mx, my;
 	

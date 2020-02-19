@@ -20,7 +20,7 @@ public class DataHandle {
 		node = new ArrayList<Node>();
 	}
 	
-	public static DataHandle createInstance() {
+	public static DataHandle getInstance() {
 		if(data == null) data = new DataHandle();
 		return data;
 	}

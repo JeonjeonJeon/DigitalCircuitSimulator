@@ -47,7 +47,7 @@ import main.Voltage;
 
 public class MouseHandle implements MouseListener, MouseMotionListener, MouseWheelListener {
 	
-	DataHandle data = DataHandle.createInstance();
+	DataHandle data = DataHandle.getInstance();
 	WorkSpace ws;
 	
 	public double mPositionX = 0, mPositionY = 0;
