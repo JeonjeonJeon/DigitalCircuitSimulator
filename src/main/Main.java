@@ -1,29 +1,37 @@
 package main;
 
+import graphic.Frame;
 import graphic.Graphic;
+import graphic.WindowsFrame;
 
 public class Main {
 	/* variables related to frame counter */
-	public static int FPS = 0; //real FPS
-	private static long lastTime = System.nanoTime();
-	private static double amountOfTicks = 60.0;
-	private static double ns = 1000000000 / amountOfTicks;
-	private static double delta = 0;
-	private static long timer = System.currentTimeMillis();
-	private static int frames = 0;
-	private static int framesCounter;
+	
 	
 	public static boolean FPS_LOCK = true;
-	public Graphic graphic;
+	
+	Frame f;
 	
 	public Main() {
-		Class c = Property.isLinux() ? Class.forName("LinuxFrame") : Class.forName("WindowFrame");
-		graphic = (Graphic)c.newInstance();
+		if(Property.isWindows() == false) {
+			System.out.println("only support windows yet");
+		}
+		f = (Frame)new WindowsFrame("asdf");
 	}
 	
 	public static void main(String[] args) {
 		Main dcs = new Main(); // digital circuit simulator
+		
 		long now;
+		int FPS = 0; //real FPS
+		long lastTime = System.nanoTime();
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
+		long timer = System.currentTimeMillis();
+		int frames = 0;
+		int framesCounter = 0;
+		
 		while(true) {
 			now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -44,7 +52,7 @@ public class Main {
 			
 			//////////////////////////
 			
-			dcs.graphic.render(FPS);
+			dcs.f.render(FPS);
 			
 			/////////////////////////////
 			frames++;

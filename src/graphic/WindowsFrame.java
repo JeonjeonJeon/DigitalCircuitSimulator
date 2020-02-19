@@ -27,9 +27,8 @@ public class WindowsFrame extends JFrame implements Frame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-
+	
 	public void render(int fps){
 		ws.render(fps);
 	}
-
 }
