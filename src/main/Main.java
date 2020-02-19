@@ -44,7 +44,7 @@ public class Main {
 			if(FPS_LOCK == true) {
 				try {
 					
-					Thread.sleep(5);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

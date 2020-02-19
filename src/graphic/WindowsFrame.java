@@ -29,6 +29,11 @@ public class WindowsFrame extends JFrame implements Frame {
 	}
 	
 	public void render(int fps){
-		ws.render(fps);
+		try {
+			ws.render(fps);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

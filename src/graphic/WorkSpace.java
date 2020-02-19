@@ -25,9 +25,9 @@ import element.NavigationBar;
 import element.SubCircuit;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
+import eventhandler.DragAndDropHandle;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
-import eventhandler.DragAndDropHandle;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
@@ -85,7 +85,7 @@ public class WorkSpace extends JPanel{
 		
 	}
 	
-	public void render(int fps) {
+	public void render(int fps) throws Exception{
 		
 		FPS = fps;
 		paintComponent((Graphics2D)this.getGraphics());
@@ -93,6 +93,7 @@ public class WorkSpace extends JPanel{
 		// nb.mouseOver(mHandle.mPositionX, mHandle.mPositionY);
 		
 		this.getGraphics().dispose();
+		Thread.sleep(1);
 	}
 	
 	public void paintComponent(Graphics2D g) throws ConcurrentModificationException {
