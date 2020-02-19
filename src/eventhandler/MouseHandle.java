@@ -331,6 +331,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("(" + e.getX() + ", " + e.getY() + ")");
 		//bug: call node and merge itself - ConcurrentModificationException
 		//bug: double clicking one gate io - NegativeArraySizeException
 		ws.nodeExtension();

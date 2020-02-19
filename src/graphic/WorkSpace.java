@@ -59,7 +59,7 @@ public class WorkSpace extends JPanel{
 	
 	public boolean nodeMaking = false;
 	public boolean movingOne = false;
-	public boolean statusHide = true;
+	public boolean statusHide = false;
 	
 	//SubCircuit sc = new SubCircuit(7, 7);
 	
@@ -69,6 +69,8 @@ public class WorkSpace extends JPanel{
 	private DragAndDropHandle dnd = new DragAndDropHandle(this);
 	
 	private DataHandle data = DataHandle.getInstance();
+	
+	int FPS;
 	
 	public WorkSpace() {
 		super();
@@ -85,45 +87,20 @@ public class WorkSpace extends JPanel{
 	
 	public void render(int fps) {
 		
-		Graphics g = this.getGraphics();
-		Graphics2D gg = (Graphics2D)g;
+		FPS = fps;
+		paintComponent((Graphics2D)this.getGraphics());
+		// nb.paint(gg);
+		// nb.mouseOver(mHandle.mPositionX, mHandle.mPositionY);
 		
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT); 
-		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		if(ratio > 3) gg.setStroke(new BasicStroke(2));
-		else gg.setStroke(new BasicStroke(1)); 
-		//init
-		
-		if(statusHide == false) {
-			g.setColor(Color.BLACK);
-			int lineNum = 12;
-			g.drawString("Ver." + version, 0, lineNum); 	lineNum += 12;
-			g.drawString("fps: " + fps, 0, lineNum); 	lineNum += 12;
-			g.drawString("elements: " + data.elementSize(), 0, lineNum);	lineNum += 12;
-			g.drawString("nodes: " + data.nodeSize(), 0, lineNum);			lineNum += 12;
-			g.drawString("gate io: " + data.iosSize(), 0, lineNum);			lineNum += 12;
-			g.drawString("mouse: (" + mHandle.mx + ", " + mHandle.my + ") / (" + mHandle.dx + ", " + mHandle.dy + ")", 0, lineNum);	lineNum += 12;
-			g.drawString("offset: (" + offsetX + ", " + offsetY + ")", 0, lineNum);	lineNum += 12;
-			//g.drawString("element1Pos: (" + element.get(0).getX() + ", " + element.get(0).getY() + ")", 0, lineNum); lineNum += 12;	
-			if(dragBox == null) g.drawString("dragbox: null", 0, lineNum);
-			else g.drawString("dragbox: " + dragBox, 0, lineNum); 
-			lineNum += 12;
-			if(nodeTemp == null) g.drawString("nodeTemp: null", 0, lineNum);
-			else g.drawString("nodeTemp: " + nodeTemp, 0, lineNum); 
-			lineNum += 12;
-			g.drawString("moving one: " + movingOne, 0, lineNum); lineNum += 12;
-			g.drawString("node making: " + nodeMaking, 0, lineNum); lineNum += 12;
-		}
-		
-		paintComponent(gg);
-		nb.paint(gg);
-		nb.mouseOver(mHandle.mPositionX, mHandle.mPositionY);
-		
-		g.dispose();
+		this.getGraphics().dispose();
 	}
 	
 	public void paintComponent(Graphics2D g) throws ConcurrentModificationException {
+		
+		super.paintComponent(g);
+		drawSystem(g, FPS);
+		
+		g.drawString("hello: " + System.currentTimeMillis()%10000, 100, 20);
 		
 		for(int i = 0; i < data.elementSize(); i++) {
 			data.getElement(i).paint(g);
@@ -166,6 +143,37 @@ public class WorkSpace extends JPanel{
 		}
 	}
 	
+	private void drawSystem(Graphics g, int fps) {
+		Graphics2D gg = (Graphics2D) g;
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT); 
+		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		if(ratio > 3) gg.setStroke(new BasicStroke(2));
+		else gg.setStroke(new BasicStroke(1)); 
+		//init
+		
+		if(statusHide == false) {
+			g.setColor(Color.BLACK);
+			int lineNum = 12;
+			gg.drawString("Ver." + version, 0, lineNum); 	lineNum += 12;
+			gg.drawString("fps: " + fps, 0, lineNum); 	lineNum += 12;
+			g.drawString("elements: " + data.elementSize(), 0, lineNum);	lineNum += 12;
+			g.drawString("nodes: " + data.nodeSize(), 0, lineNum);			lineNum += 12;
+			g.drawString("gate io: " + data.iosSize(), 0, lineNum);			lineNum += 12;
+			g.drawString("mouse: (" + mHandle.mx + ", " + mHandle.my + ") / (" + mHandle.dx + ", " + mHandle.dy + ")", 0, lineNum);	lineNum += 12;
+			g.drawString("offset: (" + offsetX + ", " + offsetY + ")", 0, lineNum);	lineNum += 12;
+			//g.drawString("element1Pos: (" + element.get(0).getX() + ", " + element.get(0).getY() + ")", 0, lineNum); lineNum += 12;	
+			if(dragBox == null) g.drawString("dragbox: null", 0, lineNum);
+			else g.drawString("dragbox: " + dragBox, 0, lineNum); 
+			lineNum += 12;
+			if(nodeTemp == null) g.drawString("nodeTemp: null", 0, lineNum);
+			else g.drawString("nodeTemp: " + nodeTemp, 0, lineNum); 
+			lineNum += 12;
+			g.drawString("moving one: " + movingOne, 0, lineNum); lineNum += 12;
+			g.drawString("node making: " + nodeMaking, 0, lineNum); lineNum += 12;
+		}
+		
+	}
 	
 	public void terminateSim() {
 		if(isSim == false) {
@@ -269,6 +277,19 @@ public class WorkSpace extends JPanel{
 		return Calc.stickY(ny);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
