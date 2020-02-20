@@ -1,5 +1,6 @@
 package graphicComponent;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
@@ -35,7 +36,8 @@ public class Rectangle implements Serializable{
 		this.height = height;
 	}
 	
-	public void draw(Graphics2D g) {
+	public void draw(Graphics gg) {
+		Graphics2D g = (Graphics2D)gg;
 		g.draw(new Rectangle2D.Double(
 				x*WorkSpace.ratio*WorkSpace.coordinateInterval - WorkSpace.offsetX, 
 				y*WorkSpace.ratio*WorkSpace.coordinateInterval - WorkSpace.offsetY, 

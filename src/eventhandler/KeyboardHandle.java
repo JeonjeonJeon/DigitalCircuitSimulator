@@ -106,7 +106,7 @@ public class KeyboardHandle implements KeyListener {
 			ws.statusHide = !ws.statusHide;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_L) {
-			Main.FPS_LOCK = !Main.FPS_LOCK;
+			//Main.FPS_LOCK = !Main.FPS_LOCK;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_W) {
 			ws.nodeExtension();

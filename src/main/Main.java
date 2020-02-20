@@ -1,14 +1,11 @@
 package main;
 
 import graphic.Frame;
-import graphic.Graphic;
 import graphic.WindowsFrame;
 
 public class Main {
 	/* variables related to frame counter */
 	
-	
-	public static boolean FPS_LOCK = true;
 	
 	Frame f;
 	
@@ -22,6 +19,44 @@ public class Main {
 	public static void main(String[] args) {
 		Main dcs = new Main(); // digital circuit simulator
 		
+		try {
+			dcs.renderAlgorithm2(dcs.f);
+		} catch(InterruptedException ie) {
+			ie.printStackTrace();
+			System.exit(0);
+		}
+	}
+	
+	private void renderAlgorithm2(Frame f) throws InterruptedException{
+		int targetFPS = 60;
+		int targetPeriod = 1000/targetFPS; // unit: milli sec
+		
+		int FPS = 0;
+		long period = targetPeriod;
+		
+		System.out.println("target FPS: " + targetFPS);
+		System.out.println("target period: " + targetPeriod);
+		
+		long savedTime = System.currentTimeMillis();
+		int count = 0;
+		while(true) {
+			
+			f.render(FPS);
+			count++;
+			Thread.sleep(period);
+			
+			
+			if(System.currentTimeMillis() - savedTime > 1000) {
+				savedTime = System.currentTimeMillis();
+				FPS = count;
+				count = 0;
+			}
+		}
+		
+	}
+	
+	
+	private void renderAlgorithm(Frame f) {
 		long now;
 		int FPS = 0; //real FPS
 		long lastTime = System.nanoTime();
@@ -31,6 +66,7 @@ public class Main {
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		int framesCounter = 0;
+		boolean FPS_LOCK = true;
 		
 		while(true) {
 			now = System.nanoTime();
@@ -52,7 +88,7 @@ public class Main {
 			
 			//////////////////////////
 			
-			dcs.f.render(FPS);
+			f.render(FPS);
 			
 			/////////////////////////////
 			frames++;

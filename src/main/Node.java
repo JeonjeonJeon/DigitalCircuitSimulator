@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -78,20 +79,22 @@ public class Node implements Serializable{
 		currentLine = new Line(currentLine.x2, currentLine.y2, currentLine.x2, currentLine.y2);
 	}
 	
-	public void paint(Graphics2D g, double mx, double my) {
+	public void paint(Graphics g, double mx, double my) {
 		//if(containing != -1) g.setColor(Color.PINK);
 		//else g.setColor(Color.BLACK);
+		
+		Graphics2D gg = (Graphics2D)g;
 		for(int i=0 ; i<lines.size() ; i++) {
 			if(i == containing) {
-				g.setColor(Color.RED);
+				gg.setColor(Color.RED);
 			}
 			else {
-				g.setColor(Voltage.getColor(state));
+				gg.setColor(Voltage.getColor(state));
 			}
 			if(selected == true) {
-				g.setColor(Color.BLUE);
+				gg.setColor(Color.BLUE);
 			}
-			lines.get(i).paint(g);
+			lines.get(i).paint(gg);
 		}
 		
 		//drawing current line, it varies by mouse cursor movement
@@ -104,7 +107,7 @@ public class Node implements Serializable{
 				currentLine.x2 = currentLine.x1;
 				currentLine.y2 = my;
 			}
-			currentLine.draw(g);
+			currentLine.draw(gg);
 		}
 	}
 	

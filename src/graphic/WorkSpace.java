@@ -88,15 +88,11 @@ public class WorkSpace extends JPanel{
 	public void render(int fps) throws Exception{
 		
 		FPS = fps;
-		paintComponent((Graphics2D)this.getGraphics());
-		// nb.paint(gg);
-		// nb.mouseOver(mHandle.mPositionX, mHandle.mPositionY);
-		
-		this.getGraphics().dispose();
-		Thread.sleep(1);
+		repaint();
 	}
 	
-	public void paintComponent(Graphics2D g) throws ConcurrentModificationException {
+	@Override
+	public void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
 		drawSystem(g, FPS);
@@ -104,7 +100,7 @@ public class WorkSpace extends JPanel{
 		g.drawString("hello: " + System.currentTimeMillis()%10000, 100, 20);
 		
 		for(int i = 0; i < data.elementSize(); i++) {
-			data.getElement(i).paint(g);
+			data.getElement(i).paint((Graphics2D)g);
 		}
 		
 		for(int i = 0 ; i< data.nodeSize(); i++) {
@@ -121,7 +117,7 @@ public class WorkSpace extends JPanel{
 		for(double dotx = 0 ; dotx < 50*ratio*coordinateInterval ; dotx += ratio*coordinateInterval) {
 			for(double doty = 0 ; doty < 40*ratio*coordinateInterval ; doty += ratio*coordinateInterval) {
 				coordDot.setRect(dotx - offsetX, doty - offsetY, 1, 1);
-				g.fill(coordDot);
+				((Graphics2D) g).fill(coordDot);
 			}
 		}
 		

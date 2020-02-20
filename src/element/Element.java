@@ -1,6 +1,7 @@
 package element;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
@@ -32,6 +33,7 @@ public abstract class Element implements Serializable{
 	}
 
 	public void paint(Graphics2D g) {
+		
 		
 		g.setColor(Color.BLACK);
 		
