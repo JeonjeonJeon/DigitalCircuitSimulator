@@ -38,7 +38,7 @@ import main.Voltage;
 
 public class WorkSpace extends JPanel{
 	private static final long serialVersionUID = 3147910908867708447L;
-	private final String version = "190203";
+	private final String version = "200506";
 	
 	public static double ratio = 2; //increased or decreased when size of work space changes
 	public static final double coordinateInterval = 10; //pixels between coordinate is coordinateInterval*ratio 
