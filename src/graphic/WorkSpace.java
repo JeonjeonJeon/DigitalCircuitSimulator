@@ -168,6 +168,7 @@ public class WorkSpace extends JPanel{
 			g.drawString("moving one: " + movingOne, 0, lineNum); lineNum += 12;
 			g.drawString("node making: " + nodeMaking, 0, lineNum); lineNum += 12;
 		}
+		nb.paint(gg);
 		
 	}
 	
