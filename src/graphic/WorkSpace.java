@@ -15,19 +15,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
 import javax.swing.JPanel;
 
 import datahandler.DataHandle;
 import element.Element;
-import element.NavigationBar;
 import element.SubCircuit;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import eventhandler.DragAndDropHandle;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
+import framework.NavigationBar;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
