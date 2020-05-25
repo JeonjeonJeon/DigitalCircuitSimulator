@@ -6,14 +6,16 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import graphicComponent.Calc;
-import graphic.Windows;
+import main.Property;
 
 public class NavigationBar {
 	
-	double x = Windows.WIDTH - 30;
-	int xmin = Windows.WIDTH - 140;
-	int xmax = Windows.WIDTH -30;
-	int boundMax = Windows.WIDTH - 90;
+	double outlineWidth = 100;
+	double outlineHeight = 100;
+	double x = Property.WIDTH - outlineWidth - 20;
+	int xmin = Property.WIDTH - 140;
+	int xmax = Property.WIDTH -30;
+	int boundMax = Property.WIDTH - 90;
 	
 	RoundRectangle2D.Double outline;
 	RoundRectangle2D.Double[][] icons;
@@ -25,8 +27,8 @@ public class NavigationBar {
 	double counter = 0;
 	
 	public NavigationBar() {
-		outline = new RoundRectangle2D.Double(x, 10, 100, Windows.HEIGHT - 100, 30, 30);
-		bound = new Rectangle2D.Double(boundMax, 0, Windows.WIDTH-xmin, Windows.HEIGHT);
+		outline = new RoundRectangle2D.Double(x, 10, outlineWidth, Property.HEIGHT - 100, 30, 30);
+		bound = new Rectangle2D.Double(boundMax, 0, Property.WIDTH-xmin, Property.HEIGHT);
 		
 		icons = new RoundRectangle2D.Double[17][2];
 		for(int i = 0 ; i < 17 ; i++) {
@@ -57,7 +59,6 @@ public class NavigationBar {
 		
 		g.setColor(Color.GRAY);
 		g.drawString("outline position: " + x + "10", (int)x, 10);
-		System.out.println("draw navigation bar");
 		g.fill(outline);
 		g.setColor(Color.WHITE);
 		for(int i = 0 ; i < 17 ; i++) {
