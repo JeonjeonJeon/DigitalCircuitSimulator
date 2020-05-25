@@ -1,33 +1,32 @@
 package main;
 
-import graphic.Frame;
-import graphic.WindowsFrame;
+import graphic.Windows;
 
 public class Main {
 	/* variables related to frame counter */
 	
 	
-	Frame f;
+	Windows window;
 	
 	public Main() {
 		if(Property.isWindows() == false) {
 			System.out.println("only support windows yet");
 		}
-		f = (Frame)new WindowsFrame("asdf");
+		window = new Windows("Digital Circuit Simultor");
 	}
 	
 	public static void main(String[] args) {
 		Main dcs = new Main(); // digital circuit simulator
 		
 		try {
-			dcs.renderAlgorithm2(dcs.f);
+			dcs.renderAlgorithm2(dcs.window);
 		} catch(InterruptedException ie) {
 			ie.printStackTrace();
 			System.exit(0);
 		}
 	}
 	
-	private void renderAlgorithm2(Frame f) throws InterruptedException{
+	private void renderAlgorithm2(Windows win) throws InterruptedException{
 		int targetFPS = 60;
 		int targetPeriod = 1000/targetFPS; // unit: milli sec
 		
@@ -41,7 +40,7 @@ public class Main {
 		int count = 0;
 		while(true) {
 			
-			f.render(FPS);
+			win.render(FPS);
 			count++;
 			Thread.sleep(period);
 			
@@ -56,7 +55,7 @@ public class Main {
 	}
 	
 	
-	private void renderAlgorithm(Frame f) {
+	private void renderAlgorithm(Windows win) {
 		long now;
 		int FPS = 0; //real FPS
 		long lastTime = System.nanoTime();
@@ -88,7 +87,7 @@ public class Main {
 			
 			//////////////////////////
 			
-			f.render(FPS);
+			win.render(FPS);
 			
 			/////////////////////////////
 			frames++;

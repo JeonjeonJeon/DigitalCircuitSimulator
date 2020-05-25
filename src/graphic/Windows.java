@@ -5,11 +5,11 @@ import javax.swing.SpringLayout;
 
 import main.Property;
 
-public class WindowsFrame extends JFrame implements Frame {
+public class Windows extends JFrame {
 	
 	WorkSpace ws;
 	
-	public WindowsFrame(String name){
+	public Windows(String name){
 		super(name);
 		ws = new WorkSpace();
 		SpringLayout sl = new SpringLayout();
