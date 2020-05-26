@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import graphicComponent.Rectangle;
 
 public class GateIO implements Serializable{

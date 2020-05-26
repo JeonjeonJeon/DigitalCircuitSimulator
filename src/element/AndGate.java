@@ -3,7 +3,7 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import main.GateIO;
 import main.Voltage;
 

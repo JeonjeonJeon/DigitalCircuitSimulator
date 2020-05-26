@@ -1,6 +1,6 @@
 package main;
 
-import graphic.Windows;
+import framework.Windows;
 
 public class Main {
 	/* variables related to frame counter */

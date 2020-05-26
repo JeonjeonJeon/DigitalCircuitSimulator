@@ -11,7 +11,7 @@ import element.Switch;
 import element.TextBlock;
 import element.VPulse;
 import element.Vdc;
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import main.GateIO;
 import main.Main;
 import main.Node;

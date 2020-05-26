@@ -36,7 +36,7 @@ import element.TristateBufferGate;
 import element.VPulse;
 import element.Vdc;
 import element.XorGate;
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;

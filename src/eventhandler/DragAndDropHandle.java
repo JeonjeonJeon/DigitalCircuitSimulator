@@ -18,7 +18,7 @@ import datahandler.DataHandle;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import main.GateIO;
 import main.Node;
 

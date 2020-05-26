@@ -1,4 +1,4 @@
-package graphic;
+package framework;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -26,7 +26,6 @@ import element.SubCircuitOutput;
 import eventhandler.DragAndDropHandle;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
-import framework.NavigationBar;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;

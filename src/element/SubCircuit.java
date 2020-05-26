@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import graphicComponent.Calc;
 import main.GateIO;
 import main.Node;

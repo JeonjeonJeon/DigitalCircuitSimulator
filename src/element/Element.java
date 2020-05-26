@@ -8,7 +8,7 @@ import java.awt.geom.Line2D;
 import java.io.Serializable;
 
 import datahandler.DataHandle;
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import graphicComponent.Rectangle;
 import main.Voltage;
 

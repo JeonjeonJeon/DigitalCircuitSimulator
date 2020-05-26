@@ -1,4 +1,4 @@
-package graphic;
+package framework;
 
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;

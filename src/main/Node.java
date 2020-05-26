@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import datahandler.DataHandle;
-import graphic.WorkSpace;
+import framework.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Line;
 import graphicComponent.Rectangle;
