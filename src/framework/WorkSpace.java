@@ -52,8 +52,6 @@ public class WorkSpace extends JPanel{
 	public Rectangle2D.Double coordDot = new Rectangle2D.Double();
 	public NavigationBar nb = new NavigationBar();
 	
-	public boolean isSim = false;
-	public boolean simConti = false;
 	
 	public boolean nodeMaking = false;
 	public boolean movingOne = false;
@@ -119,23 +117,9 @@ public class WorkSpace extends JPanel{
 			}
 		}
 		
-		if(simConti == true) {
-			sim();
-			/*
-			for(Element ee : element) {
-				if(ee instanceof SubCircuit) {
-					SubCircuit sc = (SubCircuit) ee;
-					sc.preSim();
-				}
-			}
-			for(Element ee : element) {
-				ee.sim1();
-			}
-			for(Element ee : element) {
-				ee.sim2();
-			}
-			*/
-		}
+//		if(simConti == true) {
+//			sim();
+//		}
 	}
 	
 	private void drawSystem(Graphics g, int fps) {
@@ -171,30 +155,6 @@ public class WorkSpace extends JPanel{
 		
 	}
 	
-	public void terminateSim() {
-		if(isSim == false) {
-			System.out.println("press STARTSIM first");
-			return;
-		}
-		isSim = false;
-		simConti = false;
-		for(int i = 0; i < data.nodeSize(); i++) {
-			data.getNode(i).setState(Voltage.LOW);
-		}
-	}
-	public void sim() {
-		if(isSim == false) {
-			System.out.println("press STARTSIM first");
-			return;
-		}
-		
-		for(int i = 0; i < data.elementSize(); i++) {
-			data.getElement(i).sim1();
-		}
-		for(int i = 0; i < data.elementSize(); i++) {
-			data.getElement(i).sim2();
-		}
-	}
 
 	public void getSCFile(String link, double mousex, double mousey) throws FileNotFoundException, IOException, ClassNotFoundException{
 		SubCircuit sc = new SubCircuit(mousex, mousey);
@@ -273,14 +233,6 @@ public class WorkSpace extends JPanel{
 		return Calc.stickY(ny);
 	}
 }
-
-
-
-
-
-
-
-
 
 
 

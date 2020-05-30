@@ -112,7 +112,7 @@ public class KeyboardHandle implements KeyListener {
 			ws.nodeExtension();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			ws.sim();
+			//ws.sim();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_P) {
 			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);

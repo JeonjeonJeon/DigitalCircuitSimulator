@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import datahandler.DataHandle;
+import datahandler.Simulation;
 import element.AndGate;
 import element.BufferGate;
 import element.Element;
@@ -47,8 +48,9 @@ import main.Voltage;
 
 public class MouseHandle implements MouseListener, MouseMotionListener, MouseWheelListener {
 	
-	DataHandle data = DataHandle.getInstance();
+	DataHandle data;
 	WorkSpace ws;
+	Simulation sim;
 	
 	public double mPositionX = 0, mPositionY = 0;
 	public double mx = 0, my = 0;//mouse coordinate
@@ -57,7 +59,9 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	private String message;
 	
 	public MouseHandle(WorkSpace workspace) {
+		data = DataHandle.getInstance();
 		ws = workspace;
+		sim = Simulation.getInstance();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -66,71 +70,71 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		dx = mx;
 		dy = my;
 		if(message == "OR") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new OrGate(mx, my));
 		}
 		else if(message == "AND") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new AndGate(mx, my));
 		}
 		else if(message == "VPULSE") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new VPulse(mx, my));
 		}
 		else if(message == "GND") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new Ground(mx, my));
 		}
 		else if(message == "SWITCH") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new Switch(mx, my));
 		}
 		else if(message == "VDC") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new Vdc(mx, my));
 		}
 		else if(message == "MONITOR") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new Monitor(mx, my));
 		}
 		else if(message == "NOT") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new NotGate(mx, my));
 		}
 		else if(message == "INPUT") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new SubCircuitInput(mx, my));
 		}
 		else if(message == "OUTPUT") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new SubCircuitOutput(mx, my));
 		}
 		else if(message == "NAND") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new NandGate(mx, my));
 		}
 		else if(message == "NOR") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new NorGate(mx, my));
 		}
 		else if(message == "BUFFER") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new BufferGate(mx, my));
 		}
 		else if(message == "XOR") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new XorGate(mx, my));
 		}
 		else if(message == "TRISTATE") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new TristateBufferGate(mx, my));
 		}
 		else if(message == "TEXT") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new TextBlock(mx, my));
 		}
 		else if(message == "SEVEN") {
-			if(ws.isSim == true) ws.terminateSim();
+			//if(ws.isSim == true) ws.terminateSim();
 			data.addElement(new SevenSegment(mx, my));
 		}
 		else if(message != null && message.endsWith("NULL")) {
@@ -150,63 +154,26 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		
 		
 		if(message == "SIM_START") {
-			ws.isSim = true;
-			for(int i = 0; i < data.nodeSize(); i++) {
-				Node nn = data.getNode(i);
-				if(nn.startSim() == false) {
-					ws.isSim = false;
-					System.out.println("Error found at some nodes. Simulation failed!!");
-					return;
-				}
-			}
-			for(int i = 0; i < data.nodeSize(); i++) {
-				Node nn = data.getNode(i);
-				nn.setState(Voltage.LOW);
-			}
-			
-			for(int i = 0; i < data.elementSize(); i++) {
-				Element ee = data.getElement(i);
-				if(ee instanceof Monitor) {
-					Monitor m = (Monitor)ee;
-					m.getLinkedNode().setState(Voltage.LOW);
-				}
-				else if(ee instanceof Vdc) {
-					Vdc vdc = (Vdc)ee;
-					vdc.sim1();
-					vdc.sim2();
-				}
-				else if(ee instanceof SubCircuit) {
-					SubCircuit sc = (SubCircuit) ee;
-					sc.simInit(Voltage.LOW);
-				}
-			}
+			sim.startSim();
 		}
 		
 		else if(message == "SIM_STEP_INTO") {
-			ws.sim();
+			//ws.sim();
 		}
 		else if(message == "SIM_10_STEP") {
-			if(ws.isSim == false) {
-				System.out.println("press STARTSIM first");
-				return;
-			}
 			for(int i = 0; i < 10; i++) {
-				ws.sim();
+				sim.sim();
 			}
 			
 		}
 		else if(message == "SIM_CONTINUOUS") {
-			if(ws.isSim == false) {
-				System.out.println("press SIM_START first");
-				return;
-			}
-			ws.simConti = true;
+			sim.simContinuous();
 		}
 		else if(message == "SIM_END"){
-			ws.terminateSim();
+			//ws.terminateSim();
 		}
 		else if(message == "FILE_SAVE") {
-			ws.terminateSim();
+			//ws.terminateSim();
 			JFileChooser jfc = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Digital Circuit Simulator", "dcs");
 			FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Sub Circuit", "sc");

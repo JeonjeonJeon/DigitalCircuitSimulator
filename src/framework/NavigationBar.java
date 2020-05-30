@@ -58,7 +58,6 @@ public class NavigationBar {
 	public void paint(Graphics2D g) {
 		
 		g.setColor(Color.GRAY);
-		g.drawString("outline position: " + x + "10", (int)x, 10);
 		g.fill(outline);
 		g.setColor(Color.WHITE);
 		for(int i = 0 ; i < 17 ; i++) {
