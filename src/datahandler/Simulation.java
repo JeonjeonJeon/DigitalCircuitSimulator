@@ -20,6 +20,7 @@ public class Simulation implements Runnable{
 		return instance;
 	}
 	private Simulation() {
+		System.out.println("simulation instance has been made");
 		data = DataHandle.getInstance();
 		isSim = false;
 	}
@@ -37,6 +38,7 @@ public class Simulation implements Runnable{
 			data.getElement(i).sim2();
 		}
 	}	
+
 	public void terminateSim() {
 		if(isSim == false) {
 			System.out.println("press STARTSIM first");
@@ -91,7 +93,7 @@ public class Simulation implements Runnable{
 	}
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		while(true) {
+		}
 	}
 }

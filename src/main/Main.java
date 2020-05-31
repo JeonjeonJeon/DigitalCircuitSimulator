@@ -1,6 +1,5 @@
 package main;
 
-import datahandler.Simulation;
 import framework.Windows;
 
 public class Main implements Runnable{
@@ -15,13 +14,13 @@ public class Main implements Runnable{
 	
 	public static void main(String[] args) {
 		Main dcs = new Main(); // digital circuit simulator
-		Simulation sim = Simulation.getInstance();
+		//Simulation sim = Simulation.getInstance();
 
 		Thread mainThread = new Thread(dcs);
-		Thread simThread = new Thread(sim);
+		//Thread simThread = new Thread(sim);
 
 		mainThread.start();
-		simThread.start();
+		//simThread.start();
 
 	}
 	
