@@ -1,31 +1,39 @@
-package graphic;
+package framework;
 
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 
-public class WindowFrame extends Graphic {
-	private JFrame jf;
-	public WindowFrame(String name){
+import main.Property;
+
+public class Windows extends JFrame {
+	
+	WorkSpace ws;
+	
+	public Windows(String name){
+		super(name);
 		ws = new WorkSpace();
-		jf = new JFrame(name);
 		SpringLayout sl = new SpringLayout();
 
-		jf.setBounds(100, 100, Property.WIDTH, Property.HEIGHT);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.getContentPane().setLayout(sl);
+		setBounds(100, 100, Property.WIDTH, Property.HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(sl);
 		sl.putConstraint(SpringLayout.NORTH, ws, 0, SpringLayout.NORTH, getContentPane());
 		sl.putConstraint(SpringLayout.WEST, ws, 0, SpringLayout.WEST, getContentPane());
 		sl.putConstraint(SpringLayout.SOUTH, ws, 0, SpringLayout.SOUTH, getContentPane());
 		sl.putConstraint(SpringLayout.EAST, ws, 0, SpringLayout.EAST, getContentPane());
-		jf.getContentPane().add(ws);
+		getContentPane().add(ws);
 
-		jf.setResizable(false);
-		jf.setLocationRelativeTo(null);
-		jf.setVisible(true);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
-
+	
 	public void render(int fps){
-		ws.render(fps);
+		try {
+			ws.render(fps);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
-
 }

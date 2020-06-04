@@ -1,2 +1,8 @@
 /graphic/
 /main/
+/framework/
+/datahandler/
+/element/
+/eventhandler/
+/graphicComponent/
+/.DS_Store

@@ -1,19 +1,21 @@
-package window;
+package framework;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
-
-import util.Calc;
+import graphicComponent.Calc;
+import main.Property;
 
 public class NavigationBar {
 	
-	double x = Window.WIDTH - 30;
-	int xmin = Window.WIDTH - 140;
-	int xmax = Window.WIDTH -30;
-	int boundMax = Window.WIDTH - 90;
+	double outlineWidth = 100;
+	double outlineHeight = 100;
+	double x = Property.WIDTH - outlineWidth - 20;
+	int xmin = Property.WIDTH - 140;
+	int xmax = Property.WIDTH -30;
+	int boundMax = Property.WIDTH - 90;
 	
 	RoundRectangle2D.Double outline;
 	RoundRectangle2D.Double[][] icons;
@@ -25,8 +27,8 @@ public class NavigationBar {
 	double counter = 0;
 	
 	public NavigationBar() {
-		outline = new RoundRectangle2D.Double(x, 10, 100, Window.HEIGHT - 100, 30, 30);
-		bound = new Rectangle2D.Double(boundMax, 0, Window.WIDTH-xmin, Window.HEIGHT);
+		outline = new RoundRectangle2D.Double(x, 10, outlineWidth, Property.HEIGHT - 100, 30, 30);
+		bound = new Rectangle2D.Double(boundMax, 0, Property.WIDTH-xmin, Property.HEIGHT);
 		
 		icons = new RoundRectangle2D.Double[17][2];
 		for(int i = 0 ; i < 17 ; i++) {

@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import framework.WorkSpace;
+import graphicComponent.Calc;
 import main.GateIO;
 import main.Node;
 import main.Voltage;
-import util.Calc;
-import window.WorkSpace;
 
 public class SubCircuit extends Element {
 	private static final long serialVersionUID = 4038549874770807873L;
@@ -56,12 +56,12 @@ public class SubCircuit extends Element {
 		for(int i = 0 ; i < in ; i++) {
 			input[i] = new GateIO(coordx, Math.round(coordy + 2 + 2*i), 0);
 			inputInner[i] = new GateIO(coordx, Math.round(coordy + 2 + 2*i), 0);
-			WorkSpace.ios.add(input[i]);
+			data.addGateIO(input[i]);
 		}
 		for(int i = 0 ; i < out ; i++) {
 			output[i] = new GateIO(coordx + 6, Math.round(coordy + 2 + 2*i), 0);
 			outputInner[i] = new GateIO(coordx + 6, Math.round(coordy + 2 + 2*i), 0);
-			WorkSpace.ios.add(output[i]);
+			data.addGateIO(output[i]);
 		}
 		
 		
@@ -126,17 +126,17 @@ public class SubCircuit extends Element {
 	@Override
 	public void removeData() {
 		
-		WorkSpace.ios.removeAll(ios);
+		data.removeAll(ios);
 		for(int i = 0 ; i < inputNum ; i++) {
-			WorkSpace.ios.remove(input[i]);
+			data.removeGateIO(input[i]);
 		}
 		for(int i = 0 ; i < outputNum ; i++) {
-			WorkSpace.ios.remove(output[i]);
+			data.removeGateIO(output[i]);
 		}
-		for(int i = 0; i < WorkSpace.node.size(); i++) {
+		for(int i = 0; i < data.nodeSize(); i++) {
 			for(Node n : node) {
-				if(WorkSpace.node.get(i).equals(n)) {
-					WorkSpace.node.remove(i);
+				if(data.getNode(i).equals(n)) {
+					data.removeNode(i);
 					i--;
 				}
 			}

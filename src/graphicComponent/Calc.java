@@ -1,9 +1,9 @@
-package util;
+package graphicComponent;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
-import window.WorkSpace;
+import framework.WorkSpace;
 
 public class Calc {
 	

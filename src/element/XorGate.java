@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 
 import main.GateIO;
 import main.Voltage;
-import window.WorkSpace;
 
 public class XorGate extends Element {
 	private static final long serialVersionUID = -5962861935648209191L;
@@ -20,9 +19,9 @@ public class XorGate extends Element {
 		input1 = new GateIO(coordx, coordy+1, 0);
 		input2 = new GateIO(coordx, coordy+3, 0);
 		
-		WorkSpace.ios.add(output);
-		WorkSpace.ios.add(input1);
-		WorkSpace.ios.add(input2);
+		data.addGateIO(output);
+		data.addGateIO(input1);
+		data.addGateIO(input2);
 	}
 
 	public void paint(Graphics2D g) {
@@ -48,9 +47,9 @@ public class XorGate extends Element {
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(output);
-		WorkSpace.ios.remove(input1);
-		WorkSpace.ios.remove(input2);
+		data.removeGateIO(output);
+		data.removeGateIO(input1);
+		data.removeGateIO(input2);
 		
 	}
 

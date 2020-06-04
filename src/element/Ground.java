@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 
 import main.GateIO;
 import main.Voltage;
-import window.WorkSpace;
 
 public class Ground extends Element{
 	private static final long serialVersionUID = 6218953185657470482L;
@@ -16,7 +15,7 @@ public class Ground extends Element{
 	public Ground(double coorx, double coory) {
 		super(coorx, coory);
 		output = new GateIO(coordx + 1, coordy, 2);
-		WorkSpace.ios.add(output);
+		data.addGateIO(output);
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class Ground extends Element{
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(output);	
+		data.removeGateIO(output);	
 	}
 
 	@Override

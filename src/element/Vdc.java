@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 
 import main.GateIO;
 import main.Voltage;
-import window.WorkSpace;
 
 public class Vdc extends Element {
 	private static final long serialVersionUID = -7605075773535244103L;
@@ -16,7 +15,7 @@ public class Vdc extends Element {
 	public Vdc(double coorx, double coory) {
 		super(coorx, coory);
 		output = new GateIO(coordx + 1, coordy, 2);
-		WorkSpace.ios.add(output);
+		data.addGateIO(output);
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class Vdc extends Element {
 
 	@Override
 	public void removeData() {
-		WorkSpace.ios.remove(output);	
+		data.removeGateIO(output);	
 	}
 
 	@Override
@@ -63,6 +62,7 @@ public class Vdc extends Element {
 	}
 	
 	public void changeStatus() {
+		System.out.println("change status call");
 		high = !high;
 	}
 	

@@ -1,10 +1,10 @@
-package util;
+package graphicComponent;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
-import window.WorkSpace;
+import framework.WorkSpace;
 
 public class Ellipse implements Serializable{
 	private static final long serialVersionUID = 1357878472848882181L;
