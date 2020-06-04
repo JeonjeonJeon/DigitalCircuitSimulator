@@ -3,9 +3,7 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import graphicComponent.Calc;
 import main.GateIO;
-import main.Main;
 import main.Voltage;
 
 public class VPulse extends Element{
@@ -13,8 +11,9 @@ public class VPulse extends Element{
 	
 	
 	GateIO output;
-	private double pulseWidth = 1;
-	private double pulseCount = 0;
+
+	private int halfOfPeriod = 10;
+	private int pulseCount = 10;
 	private boolean outputHigh = true;
 	
 	
@@ -49,7 +48,7 @@ public class VPulse extends Element{
 		drawLine(g, 0.6, 2.3, 0.7, 1.7);
 		drawLine(g, 1.3, 1.7, 1.4, 2.3);
 		
-		drawString(g, 2, 1, pulseWidth+"");
+		drawString(g, 2, 1, pulseCount+"/"+halfOfPeriod);
 		
 		bound.setRect(coordx, coordy + 1, 2, 4);
 		
@@ -73,24 +72,27 @@ public class VPulse extends Element{
 	}
 	
 	public void sim1() {
-		if(outputHigh == true) internalState = Voltage.HIGH;
-		else internalState = Voltage.LOW;
-	}
-	public void sim2() {
-		output.setState(internalState);
 		pulseCount--;
 		if(pulseCount <= 0) {
-			pulseCount = 60 * pulseWidth; // 60 originally fps
+			if(outputHigh == true) internalState = Voltage.LOW;
+			else internalState = Voltage.HIGH;
+		}
+	}
+	
+	public void sim2() {
+		output.setState(internalState);
+		if(pulseCount <= 0) {
+			pulseCount = halfOfPeriod;
 			outputHigh = !outputHigh;
 		}
 	}
 	
-	public void setPulseWidth(double p) {
-		pulseWidth = Calc.max(p, 0.05);
-	}
-	public double getPulseWidth() {
-		return pulseWidth;
-	}
+//	public void setPulseWidth(double p) {
+//		pulseWidth = Calc.max(p, 0.05);
+//	}
+//	public double getPulseWidth() {
+//		return pulseWidth;
+//	}
 	
 	public Element copy() {
 		VPulse a = new VPulse(coordx, coordy);

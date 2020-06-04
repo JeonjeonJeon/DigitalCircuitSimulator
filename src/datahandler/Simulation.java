@@ -15,8 +15,13 @@ public class Simulation implements Runnable{
 	public boolean simConti = false;
 	
 	public static Simulation instance;
+	private static Thread simulThread;
+
 	public static Simulation getInstance() {
-		if(instance == null) instance = new Simulation();
+		if(instance == null) {
+			instance = new Simulation();
+			simulThread = new Thread(instance);
+		}
 		return instance;
 	}
 	private Simulation() {
@@ -44,6 +49,16 @@ public class Simulation implements Runnable{
 			System.out.println("press STARTSIM first");
 			return;
 		}
+		if(simConti == true) {
+			System.out.println("");
+			simulThread.interrupt();
+			try {
+				simulThread.join();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println("Thread stop: "+simulThread.isAlive());
+		}
 		isSim = false;
 		simConti = false;
 		for(int i = 0; i < data.nodeSize(); i++) {
@@ -51,14 +66,15 @@ public class Simulation implements Runnable{
 		}
 	}
 	
-	public void startSim() {
+	public boolean startSim() {
+		System.out.println("Start Sim");
 		isSim = true;
 		for(int i = 0; i < data.nodeSize(); i++) {
 			Node nn = data.getNode(i);
 			if(nn.startSim() == false) {
 				isSim = false;
 				System.out.println("Error found at some nodes. Simulation failed!!");
-				return;
+				return false;
 			}
 		}
 		for(int i = 0; i < data.nodeSize(); i++) {
@@ -82,18 +98,43 @@ public class Simulation implements Runnable{
 				sc.simInit(Voltage.LOW);
 			}
 		}
+		
+		return true;
 	}
 	
 	public void simContinuous() {
-		if(isSim == false) {
-				System.out.println("press SIM_START first");
-				return;
-			}
+		System.out.println("continuous sim pressed");
+		if(simConti == true){
+			System.out.println("Simulation already continuous");
+			return;
+			
+		}
+		else if(isSim == false && startSim() == false) {
+			System.out.println("unable to start simulation");
+			return;
+		}
+		
 		simConti = true;	
+		Simulation.simulThread.start();
 	}
+
 	@Override
 	public void run() {
-		while(true) {
+		System.out.println("thread run");
+		while(Thread.currentThread().isInterrupted() == false) {
+		/* do something */	
+			sim();
+			
+			
+			
+			
+//			try {
+//				Thread.sleep(100);
+//			} catch(InterruptedException ie) {
+//				System.out.println("sleep exception");
+//				Thread.currentThread().interrupt();
+//			}
+//			System.out.print(".");
 		}
 	}
 }

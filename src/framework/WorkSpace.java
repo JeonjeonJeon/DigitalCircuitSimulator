@@ -30,7 +30,6 @@ import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
-import main.Voltage;
 
 @SuppressWarnings("unchecked")
 
@@ -110,12 +109,12 @@ public class WorkSpace extends JPanel{
 		
 		//draw coordinate point (integer interval)
 		g.setColor(Color.BLACK);
-		for(double dotx = 0 ; dotx < 50*ratio*coordinateInterval ; dotx += ratio*coordinateInterval) {
-			for(double doty = 0 ; doty < 40*ratio*coordinateInterval ; doty += ratio*coordinateInterval) {
-				coordDot.setRect(dotx - offsetX, doty - offsetY, 1, 1);
-				((Graphics2D) g).fill(coordDot);
-			}
-		}
+//		for(double dotx = 0 ; dotx < 50*ratio*coordinateInterval ; dotx += ratio*coordinateInterval) {
+//			for(double doty = 0 ; doty < 40*ratio*coordinateInterval ; doty += ratio*coordinateInterval) {
+//				coordDot.setRect(dotx - offsetX, doty - offsetY, 1, 1);
+//				((Graphics2D) g).fill(coordDot);
+//			}
+//		}
 		
 //		if(simConti == true) {
 //			sim();

@@ -62,6 +62,7 @@ public class Vdc extends Element {
 	}
 	
 	public void changeStatus() {
+		System.out.println("change status call");
 		high = !high;
 	}
 	

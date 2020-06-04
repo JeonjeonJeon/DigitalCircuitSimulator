@@ -27,7 +27,7 @@ public class Main implements Runnable{
 	@Override
 	public void run() {
 		int targetFPS = 60;
-		int targetPeriod = 1000/targetFPS; // unit: milli sec
+		int targetPeriod = 1000/targetFPS + 10; // unit: milli sec
 		
 		int FPS = 0;
 		long period = targetPeriod;

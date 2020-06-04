@@ -9,11 +9,9 @@ import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import element.Switch;
 import element.TextBlock;
-import element.VPulse;
 import element.Vdc;
 import framework.WorkSpace;
 import main.GateIO;
-import main.Main;
 import main.Node;
 
 // keyboard event handler
@@ -64,26 +62,26 @@ public class KeyboardHandle implements KeyListener {
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 			ws.ratio *= 0.9;
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i); 
-				if(ee.contains(mx, my)) {
-					if(ee instanceof VPulse) {
-						VPulse vp = (VPulse) ee;
-						vp.setPulseWidth(vp.getPulseWidth() + 0.5);
-					}
-				}
-			}
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
-				if(ee.contains(mx, my)) {
-					if(ee instanceof VPulse) {
-						VPulse vp = (VPulse) ee;
-						vp.setPulseWidth(vp.getPulseWidth() - 0.5);
-					}
-				}
-			}
-		}
+//		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i); 
+//				if(ee.contains(mx, my)) {
+//					if(ee instanceof VPulse) {
+//						VPulse vp = (VPulse) ee;
+//						vp.setPulseWidth(vp.getPulseWidth() + 0.5);
+//					}
+//				}
+//			}
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+//			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
+//				if(ee.contains(mx, my)) {
+//					if(ee instanceof VPulse) {
+//						VPulse vp = (VPulse) ee;
+//						vp.setPulseWidth(vp.getPulseWidth() - 0.5);
+//					}
+//				}
+//			}
+//		}
 		else if(e.isControlDown() == true) {
 			if(e.getKeyCode() == KeyEvent.VK_C) {
 				for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
@@ -133,6 +131,7 @@ public class KeyboardHandle implements KeyListener {
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_C) {
+			System.out.println("c pressed");
 			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 				if(ee instanceof Switch) {
 					Switch ss = (Switch)ee;
@@ -142,10 +141,10 @@ public class KeyboardHandle implements KeyListener {
 					Vdc vdc = (Vdc)ee;
 					if(vdc.contains(mx, my)) vdc.changeStatus();
 				}
-				else if(ee instanceof VPulse) {
-					VPulse vp = (VPulse) ee;
-					if(vp.contains(mx, my)) vp.setPulseWidth(1);
-				}
+//				else if(ee instanceof VPulse) {
+//					VPulse vp = (VPulse) ee;
+//					if(vp.contains(mx, my)) vp.setPulseWidth(1);
+//				}
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DELETE) {

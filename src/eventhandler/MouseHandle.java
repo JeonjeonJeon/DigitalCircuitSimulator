@@ -28,7 +28,6 @@ import element.NorGate;
 import element.NotGate;
 import element.OrGate;
 import element.SevenSegment;
-import element.SubCircuit;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import element.Switch;
@@ -42,7 +41,6 @@ import graphicComponent.Calc;
 import graphicComponent.Rectangle;
 import main.GateIO;
 import main.Node;
-import main.Voltage;
 
 // mouse event handler
 
@@ -158,7 +156,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		}
 		
 		else if(message == "SIM_STEP_INTO") {
-			//ws.sim();
+			sim.sim();
 		}
 		else if(message == "SIM_10_STEP") {
 			for(int i = 0; i < 10; i++) {
@@ -170,7 +168,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 			sim.simContinuous();
 		}
 		else if(message == "SIM_END"){
-			//ws.terminateSim();
+			sim.terminateSim();
 		}
 		else if(message == "FILE_SAVE") {
 			//ws.terminateSim();
@@ -298,7 +296,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("(" + e.getX() + ", " + e.getY() + ")");
+		//System.out.println("(" + e.getX() + ", " + e.getY() + ")");
 		//bug: call node and merge itself - ConcurrentModificationException
 		//bug: double clicking one gate io - NegativeArraySizeException
 		ws.nodeExtension();
