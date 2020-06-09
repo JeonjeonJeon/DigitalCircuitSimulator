@@ -3,6 +3,7 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import graphicComponent.Calc;
 import main.GateIO;
 import main.Voltage;
 
@@ -87,12 +88,12 @@ public class VPulse extends Element{
 		}
 	}
 	
-//	public void setPulseWidth(double p) {
-//		pulseWidth = Calc.max(p, 0.05);
-//	}
-//	public double getPulseWidth() {
-//		return pulseWidth;
-//	}
+	public void setPulseWidth(int p) {
+		halfOfPeriod = Calc.max(p, 0);
+	}
+	public int getPulseWidth() {
+		return halfOfPeriod;
+	}
 	
 	public Element copy() {
 		VPulse a = new VPulse(coordx, coordy);

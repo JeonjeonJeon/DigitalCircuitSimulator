@@ -65,14 +65,30 @@ public class NandGate extends Element {
 		//do something with node
 	}
 	
+	/*
+	 * truth table
+	 * A B Out
+	 * 0 0 1 v
+	 * 0 1 1 v
+	 * 1 0 1 v
+	 * 1 1 0 v
+	 * 
+	 * 1 x x v
+	 * 0 x 1 v
+	 * 1 z z v
+	 * 0 z 1 v
+	 * */
 	public void sim1() {
-		if(input1.getState() == Voltage.HIGH && input2.getState() == Voltage.HIGH) {
+		if(input1.getState() == Voltage.LOW || input2.getState() == Voltage.LOW) {
+			internalState = Voltage.HIGH;
+		}
+		else if(input1.getState() == Voltage.HIGH && input2.getState() == Voltage.HIGH) {
 			internalState = Voltage.LOW;
 		}
 		else if(input1.getState() == Voltage.HIZ || input2.getState() == Voltage.HIZ) {
 			internalState = Voltage.HIZ;
 		}
-		else internalState = Voltage.HIGH;
+		else System.out.println("error in nand gate");
 	}
 	
 	public void sim2(){
