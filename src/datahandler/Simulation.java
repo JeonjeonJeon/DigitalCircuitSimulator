@@ -115,7 +115,12 @@ public class Simulation implements Runnable{
 		}
 		
 		simConti = true;	
-		Simulation.simulThread.start();
+		if(Simulation.simulThread.isAlive() == true) {
+			System.out.println("simulation is in progress, press end sim first");
+		}
+		else {
+			Simulation.simulThread.start();
+		}
 	}
 
 	@Override

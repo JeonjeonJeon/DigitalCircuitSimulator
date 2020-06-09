@@ -89,7 +89,7 @@ public class VPulse extends Element{
 	}
 	
 	public void setPulseWidth(int p) {
-		halfOfPeriod = Calc.max(p, 0);
+		halfOfPeriod = Calc.max(p, 1);
 	}
 	public int getPulseWidth() {
 		return halfOfPeriod;

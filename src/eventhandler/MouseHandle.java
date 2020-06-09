@@ -51,7 +51,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	Simulation sim;
 	
 	public double mPositionX = 0, mPositionY = 0;
-	public double mx = 0, my = 0;//mouse coordinate
+	public static double mx = 0, my = 0;//mouse coordinate
 	public double dx = 0, dy = 0;
 	
 	private String message;
@@ -364,6 +364,13 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+	
+	public static double getMouseX() {
+		return mx;
+	}
+	public static double getMouseY() {
+		return my;
 	}
 
 }

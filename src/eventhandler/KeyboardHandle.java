@@ -22,7 +22,7 @@ public class KeyboardHandle implements KeyListener {
 	WorkSpace ws;
 	DataHandle data = DataHandle.getInstance();
 	
-	int mx, my;
+	double mx, my;
 	
 	public KeyboardHandle(WorkSpace workspace) {
 		ws = workspace;
@@ -30,6 +30,8 @@ public class KeyboardHandle implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		mx = MouseHandle.getMouseX();
+		my = MouseHandle.getMouseY();
 		
 		for(int i = 0; i < data.elementSize(); i++) { 
 			Element ee = data.getElement(i); 
@@ -132,7 +134,6 @@ public class KeyboardHandle implements KeyListener {
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_C) {
-			System.out.println("c pressed");
 			for(int i = 0; i < data.elementSize(); i++) { Element ee = data.getElement(i);
 				if(ee instanceof Switch) {
 					Switch ss = (Switch)ee;
