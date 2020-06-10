@@ -9,7 +9,6 @@ import main.Voltage;
 
 public class Simulation implements Runnable{
 
-
 	private DataHandle data;
 	private boolean isSim;
 	public boolean simConti = false;
@@ -28,14 +27,14 @@ public class Simulation implements Runnable{
 		System.out.println("simulation instance has been made");
 		data = DataHandle.getInstance();
 		isSim = false;
+		simConti = false;
 	}
 
 	public void sim() {
 		if(isSim == false) {
-			System.out.println("press STARTSIM first");
+			System.out.println("fail");
 			return;
 		}
-		
 		for(int i = 0; i < data.elementSize(); i++) {
 			data.getElement(i).sim1();
 		}
@@ -69,6 +68,7 @@ public class Simulation implements Runnable{
 	public boolean startSim() {
 		System.out.println("Start Sim");
 		isSim = true;
+		simConti = false;
 		for(int i = 0; i < data.nodeSize(); i++) {
 			Node nn = data.getNode(i);
 			if(nn.startSim() == false) {
@@ -114,13 +114,13 @@ public class Simulation implements Runnable{
 			return;
 		}
 		
-		simConti = true;	
 		if(Simulation.simulThread.isAlive() == true) {
 			System.out.println("simulation is in progress, press end sim first");
 		}
 		else {
 			Simulation.simulThread.start();
 		}
+		simConti = true;	
 	}
 
 	@Override
