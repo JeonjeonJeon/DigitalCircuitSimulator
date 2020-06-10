@@ -264,9 +264,11 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		int n = e.getWheelRotation();
 		if(n < 0) {
 			ws.ratio *= 1.1;
+			ws.ratio = Calc.min(ws.ratio, 2);
 		}
 		else {
 			ws.ratio *= 0.9;
+			ws.ratio = Calc.max(ws.ratio, 0.1);
 		}
 	}
 	

@@ -31,6 +31,7 @@ public class Simulation implements Runnable{
 	}
 
 	public void sim() {
+		System.out.println("sim");
 		if(isSim == false) {
 			System.out.println("fail");
 			return;
@@ -56,7 +57,7 @@ public class Simulation implements Runnable{
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("Thread stop: "+simulThread.isAlive());
+			System.out.println("Thread stop, is thread alive: "+simulThread.isAlive());
 		}
 		isSim = false;
 		simConti = false;
@@ -103,7 +104,7 @@ public class Simulation implements Runnable{
 	}
 	
 	public void simContinuous() {
-		System.out.println("continuous sim pressed");
+		System.out.println("continuous sim pressed: " + Simulation.simulThread.isAlive());
 		if(simConti == true){
 			System.out.println("Simulation already continuous");
 			return;
@@ -118,6 +119,7 @@ public class Simulation implements Runnable{
 			System.out.println("simulation is in progress, press end sim first");
 		}
 		else {
+			simulThread = new Thread(instance);
 			Simulation.simulThread.start();
 		}
 		simConti = true;	
