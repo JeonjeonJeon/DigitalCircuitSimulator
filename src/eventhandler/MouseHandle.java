@@ -50,8 +50,8 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	WorkSpace ws;
 	Simulation sim;
 	
-	public double mPositionX = 0, mPositionY = 0;
-	public static double mx = 0, my = 0;//mouse coordinate
+	public double mPositionX = 0, mPositionY = 0; // coordinate in window
+	public static double mx = 0, my = 0; // mouse position
 	public double dx = 0, dy = 0;
 	
 	private String message;
