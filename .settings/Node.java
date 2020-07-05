@@ -11,6 +11,7 @@ import framework.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Line;
 import graphicComponent.Rectangle;
+import wires.GateIO;
 
 public class Node implements Serializable{
 	private static final long serialVersionUID = 6737281024992084310L;

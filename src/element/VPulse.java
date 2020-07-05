@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import graphicComponent.Calc;
-import main.GateIO;
 import main.Voltage;
+import wires.GateIO;
 
 public class VPulse extends Element{
 	private static final long serialVersionUID = -2265231577538159525L;

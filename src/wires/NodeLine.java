@@ -1,4 +1,4 @@
-package main;
+package wires;
 
 import java.awt.Graphics2D;
 import java.io.Serializable;

@@ -1,8 +1,7 @@
-/graphic/
+/graphicComponent/
 /main/
-/framework/
+/.DS_Store
 /datahandler/
 /element/
 /eventhandler/
-/graphicComponent/
-/.DS_Store
+/wires/

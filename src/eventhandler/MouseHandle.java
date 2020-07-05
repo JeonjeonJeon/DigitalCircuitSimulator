@@ -39,8 +39,8 @@ import element.XorGate;
 import framework.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
-import main.GateIO;
 import main.Node;
+import wires.GateIO;
 
 // mouse event handler
 

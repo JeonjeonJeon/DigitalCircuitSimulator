@@ -3,7 +3,7 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GateIO;
+import wires.GateIO;
 
 public class SubCircuitInput extends Element {	
 	private static final long serialVersionUID = 5748706230043633658L;

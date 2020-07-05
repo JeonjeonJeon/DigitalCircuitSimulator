@@ -28,8 +28,8 @@ import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
-import main.GateIO;
 import main.Node;
+import wires.GateIO;
 
 @SuppressWarnings("unchecked")
 

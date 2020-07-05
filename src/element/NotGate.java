@@ -3,8 +3,8 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GateIO;
 import main.Voltage;
+import wires.GateIO;
 
 public class NotGate extends Element {
 	private static final long serialVersionUID = 2262961646637694518L;

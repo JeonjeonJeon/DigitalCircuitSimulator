@@ -3,8 +3,8 @@ package datahandler;
 import java.util.ArrayList;
 
 import element.Element;
-import main.GateIO;
 import main.Node;
+import wires.GateIO;
 
 public class DataHandle {
 	

@@ -19,8 +19,8 @@ import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
 import framework.WorkSpace;
-import main.GateIO;
 import main.Node;
+import wires.GateIO;
 
 public class DragAndDropHandle  implements DropTargetListener {
 	

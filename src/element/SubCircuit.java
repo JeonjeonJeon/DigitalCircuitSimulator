@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import framework.WorkSpace;
 import graphicComponent.Calc;
-import main.GateIO;
 import main.Node;
 import main.Voltage;
+import wires.GateIO;
 
 public class SubCircuit extends Element {
 	private static final long serialVersionUID = 4038549874770807873L;

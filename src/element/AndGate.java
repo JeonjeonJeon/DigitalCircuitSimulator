@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import framework.WorkSpace;
-import main.GateIO;
 import main.Voltage;
+import wires.GateIO;
 
 public class AndGate extends Element {
 	private static final long serialVersionUID = 6154552516660508662L;

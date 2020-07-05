@@ -3,8 +3,8 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GateIO;
 import main.Voltage;
+import wires.GateIO;
 
 public class NandGate extends Element {
 	private static final long serialVersionUID = -7977837069261648184L;

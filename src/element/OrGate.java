@@ -3,8 +3,8 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GateIO;
 import main.Voltage;
+import wires.GateIO;
 
 public class OrGate extends Element {
 	private static final long serialVersionUID = -4664030039931093477L;

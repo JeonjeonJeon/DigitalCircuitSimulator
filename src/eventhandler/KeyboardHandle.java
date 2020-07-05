@@ -12,8 +12,8 @@ import element.TextBlock;
 import element.VPulse;
 import element.Vdc;
 import framework.WorkSpace;
-import main.GateIO;
 import main.Node;
+import wires.GateIO;
 
 // keyboard event handler
 

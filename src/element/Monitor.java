@@ -3,9 +3,9 @@ package element;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import main.GateIO;
 import main.Node;
 import main.Voltage;
+import wires.GateIO;
 
 public class Monitor extends Element {
 	private static final long serialVersionUID = -8193793001401432150L;
