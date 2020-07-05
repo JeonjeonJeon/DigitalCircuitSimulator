@@ -14,7 +14,6 @@ public class NodeLine implements Serializable{
 	public Line line;
 	public double[] xs; //x, y can be null depends on number of length of line.
 	public double[] ys; //in case of length is 1 x, y will be null
-	public double x1, y1, x2, y2;
 	int innerPoints;
 	
 	Ellipse startPoint;
@@ -25,17 +24,10 @@ public class NodeLine implements Serializable{
 		setLine(line.x1, line.y1, line.x2, line.y2);
 	}
 	public NodeLine(double x1, double y1, double x2, double y2) {//pixel coordinate
-		
-		
 		setLine(x1, y1, x2, y2);
 	}
-	public void setLine(double x_1, double y_1, double x_2, double y_2) {
-		this.x1 = x_1;
-		this.x2 = x_2;
-		this.y1 = y_1;
-		this.y2 = y_2;
-
-		line = new Line(x_1, y_1, x_2, y_2);
+	public void setLine(double x1, double y1, double x2, double y2) {
+		line = new Line(x1, y1, x2, y2);
 		if(line.y1 == line.y2) { //horizontal line
 			innerPoints = (int)(Calc.abs(line.x2 - line.x1)) - 1;
 		}

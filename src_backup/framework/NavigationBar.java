@@ -52,8 +52,7 @@ public class NavigationBar {
 		lable[lineNum][0] = "SIM_STEP_INTO";	lable[lineNum][1] = "SIM_10_STEP";	lineNum++;
 		lable[lineNum][0] = "SIM_CONTINUOUS";										lineNum++;
 																					lineNum++;
-		lable[lineNum][0] = "FILE_SAVE";	lable[lineNum][1] = "FILE_OPEN";		lineNum++;
-		lable[lineNum][0] = "TXT_FILE_SAVE";lable[lineNum][1] = "TXT_FILE_OPEN"; 	lineNum++;
+		lable[lineNum][0] = "FILE_SAVE";	lable[lineNum][1] = "FILE_OPEN";
 	}
 
 	public void paint(Graphics2D g) {

@@ -145,7 +145,7 @@ public class WorkSpace extends JPanel{
 			else g.drawString("dragbox: " + dragBox, 0, lineNum); 
 			lineNum += 12;
 			if(nodeTemp == null) g.drawString("nodeTemp: null", 0, lineNum);
-			else g.drawString("nodeTemp: " + nodeTemp + " " + nodeTemp.name, 0, lineNum); 
+			else g.drawString("nodeTemp: " + nodeTemp, 0, lineNum); 
 			lineNum += 12;
 			g.drawString("moving one: " + movingOne, 0, lineNum); lineNum += 12;
 			g.drawString("node making: " + nodeMaking, 0, lineNum); lineNum += 12;

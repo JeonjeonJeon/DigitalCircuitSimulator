@@ -118,8 +118,4 @@ public abstract class Element implements Serializable{
 		g.draw(new Rectangle2D.Double(r.x-WorkSpace.offsetX, r.y-WorkSpace.offsetY, r.width, r.height));
 	}
 	*/
-	
-	public String toNetlist() {
-		return "";
-	}
 }
