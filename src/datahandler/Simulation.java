@@ -9,7 +9,7 @@ import wires.Node;
 
 public class Simulation implements Runnable{
 
-	private DataHandle data;
+	private DataHandler data;
 	private boolean isSim;
 	public boolean simConti = false;
 	
@@ -25,7 +25,7 @@ public class Simulation implements Runnable{
 	}
 	private Simulation() {
 		System.out.println("simulation instance has been made");
-		data = DataHandle.getInstance();
+		data = DataHandler.getInstance();
 		isSim = false;
 		simConti = false;
 	}

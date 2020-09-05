@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import datahandler.DataHandle;
+import datahandler.DataHandler;
 import graphicComponent.Calc;
 import graphicComponent.Line;
 import graphicComponent.Rectangle;
@@ -17,7 +17,7 @@ public class Node implements Serializable{
 	
 	public String name  = Integer.toHexString(hashCode());
 	
-	DataHandle data = DataHandle.getInstance();
+	DataHandler data = DataHandler.getInstance();
 	
 	double coordx = 0;
 	double coordy = 0;

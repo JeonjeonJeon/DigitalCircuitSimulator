@@ -9,17 +9,16 @@ import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import datahandler.DataHandle;
+import datahandler.DataHandler;
+import datahandler.FileHandler;
 import datahandler.Simulation;
 import element.And;
 import element.Buffer;
@@ -50,9 +49,10 @@ import wires.Node;
 
 public class MouseHandle implements MouseListener, MouseMotionListener, MouseWheelListener {
 	
-	DataHandle data;
+	DataHandler data;
 	WorkSpace ws;
 	Simulation sim;
+	FileHandler fh;
 	
 	public double mPositionX = 0, mPositionY = 0; // coordinate in window
 	public static double mx = 0, my = 0; // mouse position
@@ -61,9 +61,10 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 	private String message;
 	
 	public MouseHandle(WorkSpace workspace) {
-		data = DataHandle.getInstance();
+		data = DataHandler.getInstance();
 		ws = workspace;
 		sim = Simulation.getInstance();
+		fh = FileHandler.getInstance();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -144,7 +145,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		}
 		else {
 			try {
-				ws.getSCFile(message, mx, my);
+				fh.getSCFile(message, mx, my);
 			}
 			catch(Exception exc) {
 			}
@@ -176,35 +177,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 		}
 		else if(message == "FILE_SAVE") {
 			//ws.terminateSim();
-			JFileChooser jfc = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Digital Circuit Simulator", "dcs");
-			FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Sub Circuit", "sc");
-			jfc.setFileFilter(filter);
-			jfc.addChoosableFileFilter(filter2);
-			jfc.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
-			int val = jfc.showSaveDialog(null);
-			if(val == JFileChooser.APPROVE_OPTION) {
-				try {
-					File f = jfc.getSelectedFile();
-					FileOutputStream filestream = new FileOutputStream(f);
-					ObjectOutputStream os = new ObjectOutputStream(filestream);
-					os.writeObject(new Point2D.Double(ws.offsetX, ws.offsetY));
-					os.writeObject(data.getIos());
-					os.writeObject(data.getElement());
-					os.writeObject(data.getNode());
-					os.close();
-					filestream.close();
-					
-					if(jfc.getFileFilter().getDescription().startsWith("Digital" )&& f.getName().endsWith(".dcs") == false) {
-						f.renameTo(new File(f.getAbsolutePath() + ".dcs"));
-					}
-					else if(jfc.getFileFilter().getDescription().startsWith("Sub") && f.getName().endsWith(".sc") == false){
-						f.renameTo(new File(f.getAbsolutePath() + ".sc"));
-					}
-				}catch(Exception eee) {
-					eee.printStackTrace();
-				}
-			}
+			fh.fileSave();
 		}
 		else if(message == "TXT_FILE_SAVE") {
 			JFileChooser jfc = new JFileChooser();

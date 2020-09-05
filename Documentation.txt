@@ -6,18 +6,51 @@ Digital Circuit Simulator
 Main.java : main thread가 있는 파일, graphic thread를 가지고 있고 실행한다. Graphic thread에서는 rendering 함수(window.render)를 매 주기마다 호출한다.
 
 
+
+
+
 - graphicComponet
 
+
+
+
+
+
 - datahandler
+DataHandler.java : element data를 관리하고 저장
+FileHandler.java : 파일 입출력에 대한 handler
+Simulation.java : 시뮬레이션 thread를 start/stop
+
+
+
+
+
 
 - element
 
+
+
+
+
 - wires
+
+
+
 
 - framework
 Window.java : JFrame을 상속. main함수의 graphic thread에서 호출하는 render함수가 있음. render함수는 repaint함수를 호출. JPanel안에 있는 모든 component가 repaint. paintComponent에서는 화면과 graphic ui, element들을 그린다.
 
 WorkSpace.java : JPanel을 상속. workspace가 repaint함수를 호출할 때마다 paintComponent함수가 자동으로 호출되어 repaint
+Field
+ DataHandle : element정보를 가지고 있는 handler
+ keyboradHandle : keyboard input을 처리하는 handler
+ MouseHandle : Mouse input을 처리하는 handler
+ DragAndDropHandle : Drad and Drop
+
+
+
+
+
 
 - eventhandler
 

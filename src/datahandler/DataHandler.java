@@ -6,22 +6,22 @@ import element.Element;
 import wires.GateIO;
 import wires.Node;
 
-public class DataHandle {
+public class DataHandler {
 	
-	public static DataHandle data;
+	private static DataHandler data;
 	
 	private ArrayList<Element> element;
 	private ArrayList<GateIO> ios;
 	private ArrayList<Node> node;
 	
-	private DataHandle() {
+	private DataHandler() {
 		element = new ArrayList<Element>();
 		ios = new ArrayList<GateIO>();
 		node = new ArrayList<Node>();
 	}
 	
-	public static DataHandle getInstance() {
-		if(data == null) data = new DataHandle();
+	public static DataHandler getInstance() {
+		if(data == null) data = new DataHandler();
 		return data;
 	}
 	

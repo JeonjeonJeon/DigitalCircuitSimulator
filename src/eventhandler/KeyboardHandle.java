@@ -3,7 +3,7 @@ package eventhandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import datahandler.DataHandle;
+import datahandler.DataHandler;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
@@ -20,7 +20,7 @@ import wires.Node;
 public class KeyboardHandle implements KeyListener {
 	
 	WorkSpace ws;
-	DataHandle data = DataHandle.getInstance();
+	DataHandler data = DataHandler.getInstance();
 	
 	double mx, my;
 	

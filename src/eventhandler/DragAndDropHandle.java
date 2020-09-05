@@ -14,7 +14,8 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import datahandler.DataHandle;
+import datahandler.DataHandler;
+import datahandler.FileHandler;
 import element.Element;
 import element.SubCircuitInput;
 import element.SubCircuitOutput;
@@ -25,7 +26,8 @@ import wires.Node;
 public class DragAndDropHandle  implements DropTargetListener {
 	
 	WorkSpace ws;
-	DataHandle data = DataHandle.getInstance();
+	DataHandler data = DataHandler.getInstance();
+	FileHandler fh = FileHandler.getInstance();
 	
 	public DragAndDropHandle(WorkSpace workspace) {
 		ws = workspace;
@@ -67,7 +69,7 @@ public class DragAndDropHandle  implements DropTargetListener {
 					oin.close();
 				}
 				else if(f.getAbsolutePath().endsWith(".sc")) {
-					ws.getSCFile(f.getAbsolutePath(), ws.getX(dtde.getLocation().x), ws.getY(dtde.getLocation().y));
+					fh.getSCFile(f.getAbsolutePath(), ws.getX(dtde.getLocation().x), ws.getY(dtde.getLocation().y));
 				}
 				
 			}catch(Exception eeeee) {

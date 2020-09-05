@@ -9,25 +9,18 @@ import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import datahandler.DataHandle;
+import datahandler.DataHandler;
+import datahandler.FileHandler;
 import element.Element;
-import element.SubCircuit;
-import element.SubCircuitInput;
-import element.SubCircuitOutput;
 import eventhandler.DragAndDropHandle;
 import eventhandler.KeyboardHandle;
 import eventhandler.MouseHandle;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
+import main.Main;
 import wires.GateIO;
 import wires.Node;
 
@@ -62,8 +55,9 @@ public class WorkSpace extends JPanel{
 	private KeyboardHandle kbHandle = new KeyboardHandle(this);
 	private MouseHandle mHandle = new MouseHandle(this);
 	private DragAndDropHandle dnd = new DragAndDropHandle(this);
+	private FileHandler fh = FileHandler.getInstance();
 	
-	private DataHandle data = DataHandle.getInstance();
+	private DataHandler data = DataHandler.getInstance();
 	
 	int FPS;
 	
@@ -80,19 +74,12 @@ public class WorkSpace extends JPanel{
 		
 	}
 	
-	/*
-	public void render(int fps) throws Exception{
-		
-		FPS = fps;
-		repaint();
-	}
-	*/
 	
 	@Override
 	public void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
-		drawSystem(g, FPS);
+		drawSystem(g);
 		
 		g.drawString("hello: " + System.currentTimeMillis()%10000, 100, 20);
 		
@@ -123,7 +110,7 @@ public class WorkSpace extends JPanel{
 //		}
 	}
 	
-	private void drawSystem(Graphics g, int fps) {
+	private void drawSystem(Graphics g) {
 		Graphics2D gg = (Graphics2D) g;
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT); 
@@ -136,7 +123,7 @@ public class WorkSpace extends JPanel{
 			g.setColor(Color.BLACK);
 			int lineNum = 12;
 			gg.drawString("Ver." + version, 0, lineNum); 	lineNum += 12;
-			gg.drawString("fps: " + fps, 0, lineNum); 	lineNum += 12;
+			gg.drawString("fps: " + Main.FPS, 0, lineNum); 	lineNum += 12;
 			g.drawString("elements: " + data.elementSize(), 0, lineNum);	lineNum += 12;
 			g.drawString("nodes: " + data.nodeSize(), 0, lineNum);			lineNum += 12;
 			g.drawString("gate io: " + data.iosSize(), 0, lineNum);			lineNum += 12;
@@ -157,26 +144,6 @@ public class WorkSpace extends JPanel{
 	}
 	
 
-	public void getSCFile(String link, double mousex, double mousey) throws FileNotFoundException, IOException, ClassNotFoundException{
-		SubCircuit sc = new SubCircuit(mousex, mousey);
-		File f = new File(link);
-		FileInputStream in = new FileInputStream(f);
-		ObjectInputStream oin = new ObjectInputStream(in);
-		oin.readObject(); // flush offset
-		
-		ArrayList<GateIO> gio = (ArrayList<GateIO>) oin.readObject();
-		ArrayList<Element> el = (ArrayList<Element>) oin.readObject();
-		ArrayList<Node> no = (ArrayList<Node>) oin.readObject();
-		int tempIn = 0;
-		int tempOut = 0;
-		for(int i = 0 ; i < el.size() ; i++) {
-			if(el.get(i) instanceof SubCircuitInput) tempIn++;
-			else if(el.get(i) instanceof SubCircuitOutput) tempOut++;
-		}
-		sc.init(tempIn, tempOut, el, gio, no, f.getName().split("\\.")[0]);
-		data.addElement(sc);
-		oin.close();
-	}
 
 	public void nodeExtension() {
 		if(nodeMaking == true) {

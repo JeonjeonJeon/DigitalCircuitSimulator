@@ -7,6 +7,7 @@ public class Main implements Runnable{
 	
 	
 	Windows window;
+	public static int FPS;
 
 	public Main() {
 		window = new Windows("Digital Circuit Simultor");
@@ -26,10 +27,9 @@ public class Main implements Runnable{
 	
 	@Override
 	public void run() {
-		int targetFPS = 60;
+		int targetFPS = 120;
 		int targetPeriod = 1000/targetFPS + 10; // unit: milli sec
 		
-		int FPS = 0;
 		long period = targetPeriod;
 		
 		System.out.println("target FPS: " + targetFPS);
@@ -38,7 +38,6 @@ public class Main implements Runnable{
 		long savedTime = System.currentTimeMillis();
 		int count = 0;
 		while(true) {
-			
 			window.render(FPS);
 			count++;
 			try {
@@ -54,6 +53,12 @@ public class Main implements Runnable{
 				savedTime = System.currentTimeMillis();
 				FPS = count;
 				count = 0;
+				if(FPS < targetFPS) {
+					period--;
+				}
+				else if(FPS > targetFPS) {
+					period++;
+				}
 			}
 		}
 	}
