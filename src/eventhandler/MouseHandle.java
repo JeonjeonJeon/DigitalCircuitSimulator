@@ -326,6 +326,9 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 				File f = jfc.getSelectedFile();
 				FileReader filereader = new FileReader(f);
 				BufferedReader reader = new BufferedReader(filereader);
+				
+				FileInputStream in = new FileInputStream(f);
+				ObjectInputStream oin = new ObjectInputStream(in);
 
 
 				if(f.getAbsolutePath().endsWith(".txt")) {

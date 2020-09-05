@@ -30,7 +30,8 @@ public class Windows extends JFrame {
 	
 	public void render(int fps){
 		try {
-			ws.render(fps);
+			repaint();
+			//ws.render(fps);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

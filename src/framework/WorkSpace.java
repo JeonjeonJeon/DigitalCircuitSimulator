@@ -80,11 +80,13 @@ public class WorkSpace extends JPanel{
 		
 	}
 	
+	/*
 	public void render(int fps) throws Exception{
 		
 		FPS = fps;
 		repaint();
 	}
+	*/
 	
 	@Override
 	public void paintComponent(Graphics g){
