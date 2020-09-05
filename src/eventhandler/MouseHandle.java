@@ -6,12 +6,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.ObjectInputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -41,7 +38,6 @@ import element.Xor;
 import framework.WorkSpace;
 import graphicComponent.Calc;
 import graphicComponent.Rectangle;
-import main.Property;
 import wires.GateIO;
 import wires.Node;
 
@@ -180,63 +176,7 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 			fh.fileSave();
 		}
 		else if(message == "TXT_FILE_SAVE") {
-			JFileChooser jfc = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Digital Circuit Simulator", "dcs");
-			FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Sub Circuit", "sc");
-			FileNameExtensionFilter filter3 = new FileNameExtensionFilter("Txt Sub Circuit", "txt");
-			jfc.setFileFilter(filter);
-			jfc.addChoosableFileFilter(filter3);
-			jfc.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
-			int val = jfc.showSaveDialog(null);
-			if(val == JFileChooser.APPROVE_OPTION) {
-				try {
-					File f = jfc.getSelectedFile();
-					PrintWriter printer = new PrintWriter(f);
-					
-					printer.println("* Build Date : " + Property.currentDate);
-					printer.println("* Author : " + System.getProperty("user.name") + "\n");
-					for(Element element : data.getElement()) {
-						if(element instanceof And) {
-							printer.println(element.toNetlist());
-						}
-						else if(element instanceof Nand) {
-							printer.println(element.toNetlist());
-						}
-						else if(element instanceof Nor) {
-							printer.println(element.toNetlist());
-						}
-						else if(element instanceof Or) {
-							printer.println(element.toNetlist());
-						}
-						else if(element instanceof Xor) {
-							printer.println(element.toNetlist());
-						}
-						printer.println("");
-					}
-					
-					printer.println("");
-					
-					for(Node node : data.getNode()) {
-						printer.println(node.toSaveFile());
-						printer.println("");
-					}
-					
-					printer.close();
-					
-					
-					if(jfc.getFileFilter().getDescription().startsWith("Digital" )&& f.getName().endsWith(".dcs") == false) {
-						f.renameTo(new File(f.getAbsolutePath() + ".dcs"));
-					}
-					else if(jfc.getFileFilter().getDescription().startsWith("Sub") && f.getName().endsWith(".sc") == false){
-						f.renameTo(new File(f.getAbsolutePath() + ".sc"));
-					}
-					else if(jfc.getFileFilter().getDescription().startsWith("Txt") && f.getName().endsWith(".txt") == false) {
-						f.renameTo(new File(f.getAbsolutePath() + ".txt"));
-					}
-				}catch(Exception eee) {
-					eee.printStackTrace();
-				}
-			}
+			fh.txtFileSave();
 		}
 		else if(message == "FILE_OPEN") {
 			JFileChooser jfc = new JFileChooser();
@@ -284,90 +224,8 @@ public class MouseHandle implements MouseListener, MouseMotionListener, MouseWhe
 			}
 		}
 		else if(message == "TXT_FILE_OPEN") {
-			JFileChooser jfc = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Digital Circuit Simulator", "dcs");
-			FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Sub Circuit", "sc");
-			FileNameExtensionFilter filter3 = new FileNameExtensionFilter("Txt Sub Circuit", "txt");
 
-			jfc.setFileFilter(filter);
-			jfc.addChoosableFileFilter(filter3);
-			jfc.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
-			int val = jfc.showOpenDialog(null);
-			if(val == JFileChooser.APPROVE_OPTION) {
-
-			try {
-				File f = jfc.getSelectedFile();
-				FileReader filereader = new FileReader(f);
-				BufferedReader reader = new BufferedReader(filereader);
-				
-				FileInputStream in = new FileInputStream(f);
-				ObjectInputStream oin = new ObjectInputStream(in);
-
-
-				if(f.getAbsolutePath().endsWith(".txt")) {
-					String line = "";
-					
-					ArrayList<GateIO> gateios = new ArrayList<GateIO>();
-					ArrayList<Node> nodes = new ArrayList<Node>();
-					ArrayList<Element> elements = new ArrayList<Element>();
-					
-					Node nodeTemp;
-					Element elementTemp;
-
-					int whatsReading = 0; // 0: nothing, 1: element, 2: node
-					while((line = reader.readLine()) != null) {
-						if(line.startsWith("*")) continue;
-						else if(line.startsWith(".NODE")) {
-							whatsReading = 2;
-							nodeTemp = new Node();
-							nodeTemp.name = line.split(" ")[1];
-						}
-						else if(whatsReading == 2) {
-							if(line == "") {
-								whatsReading = 0;
-							}
-							else {
-								
-								
-							}
-						}
-						
-					}
-					
-					reader.close();
-					
-					
-					
-					
-					Point2D.Double t = (Point2D.Double)(oin.readObject());
-					WorkSpace.offsetX = t.x;
-					WorkSpace.offsetY = t.y;
-					data.setIos((ArrayList<GateIO>)(oin.readObject()));
-					data.setElement((ArrayList<Element>)(oin.readObject()));
-					data.setNode((ArrayList<Node>)(oin.readObject()));
-					int inputnum = 1;
-					int outputnum = 1;
-					for(int i = 0; i < data.elementSize(); i++) {
-						Element el = data.getElement(i);
-						if(el instanceof SubCircuitInput) {
-							inputnum++;
-						}
-						else if(el instanceof SubCircuitOutput) {
-							outputnum++;
-						}
-					}
-					SubCircuitInput.num = inputnum;
-					SubCircuitOutput.num = outputnum;
-				}
-				else {
-					System.out.println("unable to open txt file");
-
-				}
-				oin.close();
-				}catch(Exception eeee) {
-					eeee.printStackTrace();
-				}
-			}
+			fh.txtFileOpen();
 		}
 		ws.dragBox = new Rectangle(ws.getX(mx), ws.getY(my), ws.getX(mx)-ws.getX(dx), ws.getY(my)-ws.getY(dy));
 		for(int i = 0; i < data.elementSize(); i++) {
